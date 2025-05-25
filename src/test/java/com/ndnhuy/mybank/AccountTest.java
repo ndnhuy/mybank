@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -59,7 +60,53 @@ class AccountTest {
     // then
     var fromAccountAfterTransfer = bankService.getAccount(fromAccount.getId());
     var toAccountAfterTransfer = bankService.getAccount(toAccount.getId());
-    assertEquals(70.0, fromAccountAfterTransfer.getBalance());
-    assertEquals(30.0, toAccountAfterTransfer.getBalance());
+    assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(70.0);
+    assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(30.0);
+  }
+
+  @Test
+  void testTransferConcurrently() throws InterruptedException {
+    // given
+    Account fromAccount = bankService.createAccount(generateAccountId(), 100.0);
+    Account toAccount = bankService.createAccount(generateAccountId(), 0.0);
+
+    // when
+    Thread thread1 = new Thread(() -> bankService.transfer(fromAccount.getId(), toAccount.getId(), 30.0));
+    Thread thread2 = new Thread(() -> bankService.transfer(fromAccount.getId(), toAccount.getId(), 20.0));
+
+    thread1.start();
+    thread2.start();
+
+    thread1.join();
+    thread2.join();
+
+    // then
+    var fromAccountAfterTransfer = bankService.getAccount(fromAccount.getId());
+    var toAccountAfterTransfer = bankService.getAccount(toAccount.getId());
+    assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(50.0);
+    assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(50.0);
+  }
+
+  @Test
+  void testTransferConcurrently_shouldNotBeDeadlock() throws InterruptedException {
+    // given
+    Account fromAccount = bankService.createAccount(generateAccountId(), 100.0);
+    Account toAccount = bankService.createAccount(generateAccountId(), 100.0);
+
+    // when
+    Thread thread1 = new Thread(() -> bankService.transfer(fromAccount.getId(), toAccount.getId(), 50.0));
+    Thread thread2 = new Thread(() -> bankService.transfer(toAccount.getId(), fromAccount.getId(), 50.0));
+
+    thread1.start();
+    thread2.start();
+
+    thread1.join();
+    thread2.join();
+
+    // then
+    var fromAccountAfterTransfer = bankService.getAccount(fromAccount.getId());
+    var toAccountAfterTransfer = bankService.getAccount(toAccount.getId());
+    assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(100.0);
+    assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(100.0);
   }
 }
