@@ -1,0 +1,65 @@
+package com.ndnhuy.mybank;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+class AccountTest {
+
+  private final static String ACCOUNT_ID_PREFIX = "test-account-";
+
+  private final static String generateAccountId() {
+    return ACCOUNT_ID_PREFIX + System.currentTimeMillis();
+  }
+
+  @Autowired
+  private BankService bankService;
+
+  @Autowired
+  private AccountRepository accountRepository;
+
+  @BeforeEach
+  void setUp() {
+    var testAccounts = accountRepository.findAll().stream()
+        .filter(account -> account.getId().startsWith(ACCOUNT_ID_PREFIX))
+        .toList();
+    accountRepository.deleteAll(testAccounts);
+  }
+
+  @Test
+  void testCreateAccount() {
+    // given
+    Double initialBalance = 100.0;
+
+    // when
+    Account account = bankService.createAccount(generateAccountId(), initialBalance);
+
+    // then
+    var actualAccount = bankService.getAccount(account.getId());
+    assertNotNull(actualAccount);
+    assertEquals(initialBalance, actualAccount.getBalance());
+  }
+
+  @Test
+  void testTransfer() {
+    // given
+    Account fromAccount = bankService.createAccount(generateAccountId(), 100.0);
+    Account toAccount = bankService.createAccount(generateAccountId(), 0.0);
+
+    // when
+    bankService.transfer(fromAccount.getId(), toAccount.getId(), 30.0);
+
+    // then
+    var fromAccountAfterTransfer = bankService.getAccount(fromAccount.getId());
+    var toAccountAfterTransfer = bankService.getAccount(toAccount.getId());
+    assertEquals(70.0, fromAccountAfterTransfer.getBalance());
+    assertEquals(30.0, toAccountAfterTransfer.getBalance());
+  }
+}

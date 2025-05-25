@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: mybank
+  datasource:
+    url: jdbc:mysql://${DOCKER_HOST_IP:localhost}:6603/mybankdb
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver

@@ -1,0 +1,9 @@
+{
+  "java.project.sourcePaths": [
+    "src/main/java"
+  ],
+  "java.project.test.sourcePaths": [
+    "src/test/java"
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
+}
