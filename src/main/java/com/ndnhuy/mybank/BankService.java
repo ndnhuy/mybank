@@ -1,10 +1,17 @@
 package com.ndnhuy.mybank;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,32 +32,65 @@ public class BankService {
   /**
    * Acquires locks for the specified account IDs in a consistent order to prevent
    * deadlocks.
+   * Handles exceptions gracefully by releasing any acquired locks before
+   * re-throwing.
    * 
    * @param accountIds the account IDs for which to acquire locks
    * @return a Runnable that releases the locks when executed
+   * @throws IllegalArgumentException if no account IDs provided or if duplicates
+   *                                  exist
    */
-  private static final Runnable acquireLocks(String... accountIds) {
+  private static Runnable acquireLocks(String... accountIds) {
     if (accountIds == null || accountIds.length == 0) {
       throw new IllegalArgumentException("At least one account ID must be provided");
     }
 
-    log.info("Acquiring locks for accounts: {}", (Object[]) accountIds);
+    // Remove duplicates and sort to ensure consistent ordering
+    Set<String> uniqueAccountIds = Arrays.stream(accountIds)
+        .filter(Objects::nonNull)
+        .collect(Collectors.toCollection(LinkedHashSet::new));
 
-    // Sort the account IDs to ensure consistent locking order
-    String[] sortedAccountIds = accountIds.clone();
-    java.util.Arrays.sort(sortedAccountIds);
-
-    for (String accountId : sortedAccountIds) {
-      getLock(accountId).lock();
-      log.info("Acquired lock for account: {}", accountId);
+    if (uniqueAccountIds.size() != accountIds.length) {
+      log.warn("Duplicate account IDs detected in lock acquisition request");
     }
 
-    return () -> {
-      for (String accountId : sortedAccountIds) {
-        getLock(accountId).unlock();
-        log.info("Released lock for account: {}", accountId);
+    var sortedAccountIds = uniqueAccountIds.stream().sorted().toList();
+
+    log.info("Acquiring locks for accounts (sorted): {}", sortedAccountIds);
+
+    List<String> lockedAccountIds = new ArrayList<>();
+    Runnable cleanUp = () -> {
+      Collections.reverse(lockedAccountIds);
+      for (String accountId : lockedAccountIds) {
+        try {
+          getLock(accountId).unlock();
+          log.debug("Released lock for account: {}", accountId);
+        } catch (Exception e) {
+          log.error("Error releasing lock for account: {}", accountId, e);
+        }
       }
+      log.debug("Released all locks for accounts: {}", sortedAccountIds);
     };
+
+    try {
+      // Acquire locks one by one, keeping track of what we've acquired
+      for (String accountId : sortedAccountIds) {
+        ReentrantLock lock = getLock(accountId);
+        lock.lock();
+        lockedAccountIds.add(accountId);
+        log.debug("Acquired lock for account: {}", accountId);
+      }
+
+      log.debug("Successfully acquired all locks for accounts: {}", sortedAccountIds);
+
+      // Return cleanup function that releases locks in reverse order
+      return cleanUp;
+    } catch (Exception e) {
+      // If any lock acquisition fails, release all previously acquired locks
+      log.error("Failed to acquire all locks, releasing {} already acquired locks", lockedAccountIds.size());
+      cleanUp.run();
+      throw e;
+    }
   }
 
   @Autowired
@@ -104,7 +144,6 @@ public class BankService {
       log.info("Transfer successful: {} from account {} to account {}", amount, fromAccount, toAccount);
     } finally {
       unlock.run();
-      log.info("Released locks for accounts {} and {}", fromAccId, toAccId);
     }
   }
 }
