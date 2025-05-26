@@ -5,5 +5,7 @@
   "java.project.test.sourcePaths": [
     "src/test/java"
   ],
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.format.settings.url": "eclipse-formatter.xml"
 }
