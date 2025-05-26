@@ -53,15 +53,15 @@ public class LocalLockService<K extends Comparable<K>> {
     }
 
     // Remove duplicates and sort to ensure consistent ordering
-    Set<K> uniqueKeys = Arrays.stream(keys)
+    var sortedKeys = Arrays.stream(keys)
         .filter(Objects::nonNull)
-        .collect(Collectors.toCollection(LinkedHashSet::new));
+        .distinct()
+        .sorted() // Sort to ensure consistent order
+        .toList();
 
-    if (uniqueKeys.size() != keys.length) {
+    if (sortedKeys.size() != keys.length) {
       log.warn("Duplicate keys detected in lock acquisition request");
     }
-
-    var sortedKeys = uniqueKeys.stream().sorted().toList();
 
     log.info("Acquiring locks for resources (sorted): {}", sortedKeys);
 
