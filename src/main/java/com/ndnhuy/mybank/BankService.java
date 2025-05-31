@@ -70,14 +70,9 @@ public class BankService {
         throw new IllegalArgumentException("Transfer amount must be positive");
       }
 
-      Account fromAccount, toAccount;
-      if (fromAccId.compareTo(toAccId) < 0) {
-        fromAccount = getAccountForUpdate(fromAccId);
-        toAccount = getAccountForUpdate(toAccId);
-      } else {
-        toAccount = getAccountForUpdate(toAccId);
-        fromAccount = getAccountForUpdate(fromAccId);
-      }
+      var accountsMap = OrderedKeyDataFetcher.fetchDataInOrderedKey(this::getAccountForUpdate, fromAccId, toAccId);
+      var fromAccount = accountsMap.get(fromAccId);
+      var toAccount = accountsMap.get(toAccId);
 
       fromAccount.withdraw(amount);
       toAccount.deposit(amount);
