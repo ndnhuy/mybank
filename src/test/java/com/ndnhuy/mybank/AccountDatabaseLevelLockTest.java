@@ -56,8 +56,8 @@ class AccountDatabaseLevelLockTest {
     thread2.join();
 
     // then
-    var fromAccountAfterTransfer = bankService.getAccount(fromAccount.getId());
-    var toAccountAfterTransfer = bankService.getAccount(toAccount.getId());
+    var fromAccountAfterTransfer = bankService.getAccountInfo(fromAccount.getId());
+    var toAccountAfterTransfer = bankService.getAccountInfo(toAccount.getId());
     assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(50.0);
     assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(50.0);
   }
@@ -79,8 +79,8 @@ class AccountDatabaseLevelLockTest {
     thread2.join();
 
     // then
-    var fromAccountAfterTransfer = bankService.getAccount(fromAccount.getId());
-    var toAccountAfterTransfer = bankService.getAccount(toAccount.getId());
+    var fromAccountAfterTransfer = bankService.getAccountInfo(fromAccount.getId());
+    var toAccountAfterTransfer = bankService.getAccountInfo(toAccount.getId());
     assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(100.0);
     assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(100.0);
   }

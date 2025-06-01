@@ -43,7 +43,7 @@ class AccountTest {
     Account account = bankService.createAccount(generateAccountId(), initialBalance);
 
     // then
-    var actualAccount = bankService.getAccount(account.getId());
+    var actualAccount = bankService.getAccountInfo(account.getId());
     assertNotNull(actualAccount);
     assertEquals(initialBalance, actualAccount.getBalance());
   }
@@ -58,8 +58,8 @@ class AccountTest {
     bankService.transfer(fromAccount.getId(), toAccount.getId(), 30.0);
 
     // then
-    var fromAccountAfterTransfer = bankService.getAccount(fromAccount.getId());
-    var toAccountAfterTransfer = bankService.getAccount(toAccount.getId());
+    var fromAccountAfterTransfer = bankService.getAccountInfo(fromAccount.getId());
+    var toAccountAfterTransfer = bankService.getAccountInfo(toAccount.getId());
     assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(70.0);
     assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(30.0);
   }
@@ -81,8 +81,8 @@ class AccountTest {
     thread2.join();
 
     // then
-    var fromAccountAfterTransfer = bankService.getAccount(fromAccount.getId());
-    var toAccountAfterTransfer = bankService.getAccount(toAccount.getId());
+    var fromAccountAfterTransfer = bankService.getAccountInfo(fromAccount.getId());
+    var toAccountAfterTransfer = bankService.getAccountInfo(toAccount.getId());
     assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(50.0);
     assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(50.0);
   }
@@ -104,8 +104,8 @@ class AccountTest {
     thread2.join();
 
     // then
-    var fromAccountAfterTransfer = bankService.getAccount(fromAccount.getId());
-    var toAccountAfterTransfer = bankService.getAccount(toAccount.getId());
+    var fromAccountAfterTransfer = bankService.getAccountInfo(fromAccount.getId());
+    var toAccountAfterTransfer = bankService.getAccountInfo(toAccount.getId());
     assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(100.0);
     assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(100.0);
   }
