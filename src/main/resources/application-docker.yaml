@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: mybank
+  datasource:
+    url: jdbc:mysql://mybankdb:3306/mybankdb
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver

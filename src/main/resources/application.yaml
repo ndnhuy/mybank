@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: mybank
@@ -6,3 +9,29 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+
+management:
+  security:
+    enabled: false
+  server:
+    port: 9001
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
+    shutdown:
+      enabled: true
+    info:
+      env:
+        enabled: true
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, metrics, info, health, shutdown, beans
