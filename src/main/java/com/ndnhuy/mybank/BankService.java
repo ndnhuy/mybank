@@ -1,5 +1,6 @@
 package com.ndnhuy.mybank;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,16 @@ public class BankService {
   @Autowired
   private AccountRepository accountRepository;
 
-  public Account createAccount(@NonNull Double initialBalance) {
+  private Account doCreateAccount(@NonNull Double initialBalance) {
     return createAccount(UUID.randomUUID().toString(), initialBalance);
+  }
+
+  public AccountInfo createAccount(@NonNull Double initialBalance) {
+    var newAcc = doCreateAccount(100.0);
+    return AccountInfo.builder()
+        .id(newAcc.getId())
+        .balance(newAcc.getBalance())
+        .build();
   }
 
   public Account createAccount(@NonNull String accountId, @NonNull Double initialBalance) {
@@ -39,7 +48,7 @@ public class BankService {
     return acc;
   }
 
-  public Account getAccount(String accountNumber) {
+  private Account getAccount(String accountNumber) {
     log.info("Retrieving account with id: {}", accountNumber);
     if (accountNumber == null || accountNumber.isEmpty()) {
       throw new IllegalArgumentException("Account number must not be null or empty");
@@ -47,6 +56,15 @@ public class BankService {
 
     return accountRepository.findById(accountNumber)
         .orElseThrow(() -> new IllegalArgumentException("Account not found with id: " + accountNumber));
+  }
+
+  public AccountInfo getAccountInfo(String accountNumber) {
+    log.info("Retrieving account info for account with id: {}", accountNumber);
+    var account = getAccount(accountNumber);
+    return AccountInfo.builder()
+        .id(account.getId())
+        .balance(account.getBalance())
+        .build();
   }
 
   public Account getAccountForUpdate(String accountNumber) {
@@ -85,5 +103,14 @@ public class BankService {
         log.info("Releasing locks for accounts: {}, {}", fromAccId, toAccId);
       }
     }
+  }
+
+  public List<AccountInfo> getAllAccounts() {
+    return accountRepository.findAll().stream()
+        .map(acc -> AccountInfo.builder()
+            .id(acc.getId())
+            .balance(acc.getBalance())
+            .build())
+        .toList();
   }
 }
