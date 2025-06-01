@@ -1,5 +1,23 @@
 version: "3.9"
 services:
+  mybank:
+    container_name: mybank
+    image: mybank:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "9001:9001"
+    # environment:
+    # - SPRING_DATASOURCE_URL=jdbc:mysql://mybankdb:3306/mybank?useSSL=false&allowPublicKeyRetrieval=true
+    # - SPRING_DATASOURCE_USERNAME=root
+    # - SPRING_DATASOURCE_PASSWORD=root
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    volumes:
+      - .data/logs:/app/logs
   mysql:
     container_name: mybankdb
     image: mysql:8.0.31
@@ -11,3 +29,14 @@ services:
     volumes:
       - .data/db:/var/lib/mysql
       - ./deployment/init.sql:/docker-entrypoint-initdb.d/init.sql
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    command:
+      - --web.enable-remote-write-receiver
+      - --enable-feature=native-histograms
+      - --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
