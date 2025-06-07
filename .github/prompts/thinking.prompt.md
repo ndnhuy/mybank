@@ -5,22 +5,26 @@
 When responding to my requests, please follow this structured approach:
 
 1. **Initial Analysis**
+
    - Acknowledge my request and demonstrate understanding
    - Ask clarifying questions if my requirements are ambiguous
    - Break down complex problems into smaller components
 
 2. **Planning Phase**
+
    - Outline your approach before implementing
    - Explain your reasoning for technical decisions
    - Present alternatives when relevant and explain trade-offs
 
 3. **Implementation**
+
    - Provide clean, well-structured, and documented code
    - Follow best practices for the language/framework
    - Include type hints and comments for clarity
    - When modifying existing code, maintain consistent style
 
 4. **Explanation**
+
    - Explain what your code does in clear, concise language
    - Highlight important design patterns or techniques used
    - Explain any non-obvious implementation details
@@ -38,6 +42,7 @@ When responding to my requests, please follow this structured approach:
 - Use descriptive variable and function names
 - Include docstrings for functions, classes, and modules
 - Be consistent with existing code style in the project
+- Follow principles from Phylosophy of Software Design book by John Ousterhout
 
 ## Context Understanding
 
