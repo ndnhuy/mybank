@@ -5,18 +5,25 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
+	"sync"
+
+	mybankerror "com.ndnhuy.mybank/mybankerror" // Adjust import path as needed
 )
 
 type User struct {
 	InitialBalance float64
 	CurrentBalance float64 // Current balance of the user
 	AccountId      string
+	Name           string // Optional alias for the user
+
+	mu sync.RWMutex
 }
 
 // NewUser creates a new User with the specified initial balance
-func NewUser(initialBalance float64) *User {
-	return &User{InitialBalance: initialBalance, CurrentBalance: initialBalance}
+func NewUser(initialBalance float64, name string) *User {
+	return &User{InitialBalance: initialBalance, CurrentBalance: initialBalance, Name: name}
 }
 
 func (u *User) GetAccount(accountID string) (*AccountInfo, error) {
@@ -52,7 +59,47 @@ func (u *User) GetAccountBalance() (float64, error) {
 }
 
 func (u *User) CreateAccount() (*AccountInfo, error) {
-	resp, err := http.Post(baseURL+"/accounts", "application/json", nil)
+	// validate
+	if u.InitialBalance <= 0 {
+		return nil, fmt.Errorf("initial balance must be greater than zero")
+	}
+
+	u.mu.Lock()
+	defer u.mu.Unlock()
+
+	if u.AccountId != "" {
+		accId := u.AccountId
+
+		acc, err := u.GetAccount(accId)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get existing account: %w", err)
+		}
+		return acc, mybankerror.AccountAlreadyCreatedError
+	}
+
+	account, err := u.createAccountRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	u.AccountId = account.ID
+
+	log.Printf("[%v] Created account with ID: %s and initial balance: %.2f", u.Name, account.ID, u.InitialBalance)
+
+	return account, nil
+}
+
+func (u *User) createAccountRequest() (*AccountInfo, error) {
+	// Create account with initial balance
+	req := CreateAccountRequest{
+		InitialBalance: u.InitialBalance,
+	}
+
+	reqBody, err := json.Marshal(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal transfer request: %w", err)
+	}
+	resp, err := http.Post(baseURL+"/accounts", "application/json", bytes.NewReader(reqBody))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create account: %w", err)
 	}
@@ -71,23 +118,13 @@ func (u *User) CreateAccount() (*AccountInfo, error) {
 	if err := json.Unmarshal(body, &account); err != nil {
 		return nil, fmt.Errorf("failed to unmarshal account info: %w", err)
 	}
-
-	u.AccountId = account.ID
-
 	return &account, nil
 }
 
-// CreateAccountWithInitialBalance creates an account for this user (currently API doesn't support custom initial balance)
-func (u *User) CreateAccountWithInitialBalance() (*AccountInfo, error) {
-	// Note: The current API creates accounts with a fixed 100.0 initial balance
-	// This method is prepared for when the API supports custom initial balances
-	return u.CreateAccount()
-}
-
-func (u *User) TransferTo(fromAccountID, toAccountID string, amount float64) error {
+func (u *User) TransferTo(toUser *User, amount float64) error {
 	transferReq := TransferRequest{
-		FromAccountID: fromAccountID,
-		ToAccountID:   toAccountID,
+		FromAccountID: u.AccountId,
+		ToAccountID:   toUser.AccountId,
 		Amount:        amount,
 	}
 
@@ -109,11 +146,12 @@ func (u *User) TransferTo(fromAccountID, toAccountID string, amount float64) err
 	return nil
 }
 
-func (u *User) ApplyActions(actions []action) *User {
+func (u *User) GetExpectedBalance(actions []action) float64 {
+	balance := u.InitialBalance
 	for _, act := range actions {
 		if act.accountId == u.AccountId {
-			u.CurrentBalance += act.balanceChange
+			balance += act.balanceChange
 		}
 	}
-	return u
+	return balance
 }

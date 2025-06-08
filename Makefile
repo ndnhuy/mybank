@@ -14,3 +14,8 @@ clean:
 
 run: clean
 	docker run -d -p 8080:8080 --name mybank mybank
+
+.PHONY: test
+
+test:
+	go test -count=1 ./...

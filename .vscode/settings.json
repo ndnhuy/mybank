@@ -7,5 +7,8 @@
   ],
   "java.configuration.updateBuildConfiguration": "interactive",
   "java.compile.nullAnalysis.mode": "automatic",
-  "java.format.settings.url": "eclipse-formatter.xml"
+  "java.format.settings.url": "eclipse-formatter.xml",
+  "go.testFlags": [
+    "-count=1"
+  ]
 }
