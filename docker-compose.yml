@@ -16,6 +16,11 @@ services:
     depends_on:
       - mysql
     restart: unless-stopped
+    cpuset: "0"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
     volumes:
       - .data/logs:/app/logs
   mysql:

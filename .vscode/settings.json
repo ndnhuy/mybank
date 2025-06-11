@@ -10,5 +10,6 @@
   "java.format.settings.url": "eclipse-formatter.xml",
   "go.testFlags": [
     "-count=1"
-  ]
+  ],
+  "diffEditor.renderSideBySide": true
 }
