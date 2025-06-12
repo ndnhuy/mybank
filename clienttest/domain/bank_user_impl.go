@@ -1,4 +1,4 @@
-package main
+package domain
 
 import (
 	"bytes"
@@ -10,11 +10,11 @@ import (
 	"sync"
 
 	mybankerror "com.ndnhuy.mybank/mybankerror" // Adjust import path as needed
+	"com.ndnhuy.mybank/utils"
 )
 
-type User struct {
+type BankUserImpl struct {
 	InitialBalance float64
-	CurrentBalance float64 // Current balance of the user
 	AccountId      string
 	Name           string // Optional alias for the user
 
@@ -22,12 +22,12 @@ type User struct {
 }
 
 // NewUser creates a new User with the specified initial balance
-func NewUser(initialBalance float64, name string) *User {
-	return &User{InitialBalance: initialBalance, CurrentBalance: initialBalance, Name: name}
+func NewUser(initialBalance float64, name string) BankUser {
+	return &BankUserImpl{InitialBalance: initialBalance, Name: name}
 }
 
-func (u *User) GetAccount(accountID string) (*AccountInfo, error) {
-	resp, err := http.Get(fmt.Sprintf("%s/accounts/%s", baseURL, accountID))
+func (u *BankUserImpl) GetAccount(accountID string) (*AccountInfo, error) {
+	resp, err := http.Get(fmt.Sprintf("%s/accounts/%s", utils.BASE_URL, accountID))
 	if err != nil {
 		return nil, fmt.Errorf("failed to get account: %w", err)
 	}
@@ -50,7 +50,7 @@ func (u *User) GetAccount(accountID string) (*AccountInfo, error) {
 	return &account, nil
 }
 
-func (u *User) GetAccountBalance() (float64, error) {
+func (u *BankUserImpl) GetAccountBalance() (float64, error) {
 	account, err := u.GetAccount(u.AccountId)
 	if err != nil {
 		return 0, fmt.Errorf("failed to get account balance: %w", err)
@@ -58,7 +58,7 @@ func (u *User) GetAccountBalance() (float64, error) {
 	return account.Balance, nil
 }
 
-func (u *User) CreateAccount() (*AccountInfo, error) {
+func (u *BankUserImpl) CreateAccount() (*AccountInfo, error) {
 	// validate
 	if u.InitialBalance <= 0 {
 		return nil, fmt.Errorf("initial balance must be greater than zero")
@@ -89,7 +89,7 @@ func (u *User) CreateAccount() (*AccountInfo, error) {
 	return account, nil
 }
 
-func (u *User) createAccountRequest() (*AccountInfo, error) {
+func (u *BankUserImpl) createAccountRequest() (*AccountInfo, error) {
 	// Create account with initial balance
 	req := CreateAccountRequest{
 		InitialBalance: u.InitialBalance,
@@ -99,7 +99,7 @@ func (u *User) createAccountRequest() (*AccountInfo, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to marshal transfer request: %w", err)
 	}
-	resp, err := http.Post(baseURL+"/accounts", "application/json", bytes.NewReader(reqBody))
+	resp, err := http.Post(utils.BASE_URL+"/accounts", "application/json", bytes.NewReader(reqBody))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create account: %w", err)
 	}
@@ -121,10 +121,10 @@ func (u *User) createAccountRequest() (*AccountInfo, error) {
 	return &account, nil
 }
 
-func (u *User) TransferTo(toUser *User, amount float64) error {
+func (u *BankUserImpl) TransferTo(toUser BankUser, amount float64) error {
 	transferReq := TransferRequest{
 		FromAccountID: u.AccountId,
-		ToAccountID:   toUser.AccountId,
+		ToAccountID:   toUser.GetAccountId(),
 		Amount:        amount,
 	}
 
@@ -133,7 +133,7 @@ func (u *User) TransferTo(toUser *User, amount float64) error {
 		return fmt.Errorf("failed to marshal transfer request: %w", err)
 	}
 
-	resp, err := http.Post(baseURL+"/accounts/transfer", "application/json", bytes.NewBuffer(reqBody))
+	resp, err := http.Post(utils.BASE_URL+"/accounts/transfer", "application/json", bytes.NewBuffer(reqBody))
 	if err != nil {
 		return fmt.Errorf("failed to perform transfer: %w", err)
 	}
@@ -146,7 +146,7 @@ func (u *User) TransferTo(toUser *User, amount float64) error {
 	return nil
 }
 
-func (u *User) GetExpectedBalance(actions []action) float64 {
+func (u *BankUserImpl) GetExpectedBalance(actions []action) float64 {
 	balance := u.InitialBalance
 	for _, act := range actions {
 		if act.accountId == u.AccountId {
@@ -154,4 +154,12 @@ func (u *User) GetExpectedBalance(actions []action) float64 {
 		}
 	}
 	return balance
+}
+
+func (u *BankUserImpl) GetAccountId() string {
+	return u.AccountId
+}
+
+func (u *BankUserImpl) GetName() string {
+	return u.Name
 }

@@ -1,4 +1,4 @@
-package main
+package domain
 
 import (
 	"fmt"
@@ -15,8 +15,8 @@ type Scenario interface {
 
 type TransferScenario struct {
 	Name     string
-	FromUser *User
-	ToUser   *User
+	FromUser BankUser
+	ToUser   BankUser
 	Amount   float64
 
 	actions []action // actions to be performed in the scenario
@@ -50,13 +50,13 @@ func (s *TransferScenario) Run() error {
 
 	// Perform the transfer
 	s.actions = append(s.actions, action{
-		accountId:     s.FromUser.AccountId,
-		accountName:   s.FromUser.Name,
+		accountId:     s.FromUser.GetAccountId(),
+		accountName:   s.FromUser.GetName(),
 		balanceChange: -s.Amount, // negative for withdrawal
 	})
 	s.actions = append(s.actions, action{
-		accountId:     s.ToUser.AccountId,
-		accountName:   s.ToUser.Name,
+		accountId:     s.ToUser.GetAccountId(),
+		accountName:   s.ToUser.GetName(),
 		balanceChange: s.Amount, // positive for deposit
 	})
 
@@ -64,7 +64,7 @@ func (s *TransferScenario) Run() error {
 		log.Println("Transfer failed:", err)
 		return err
 	}
-	log.Printf("Transfer of %.2f from %s to %s completed successfully", s.Amount, s.FromUser.Name, s.ToUser.Name)
+	log.Printf("Transfer of %.2f from %s to %s completed successfully", s.Amount, s.FromUser.GetName(), s.ToUser.GetName())
 
 	return nil
 }

@@ -1,4 +1,4 @@
-package main
+package domain 
 
 // AccountInfo represents the account information returned by the API
 type AccountInfo struct {

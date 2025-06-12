@@ -1,4 +1,4 @@
-package main
+package domain
 
 import (
 	"fmt"
@@ -24,15 +24,15 @@ func TestTransferMoneyFromAtoB(t *testing.T) {
 	assert.NoError(t, err, "Transfer should succeed")
 
 	// Assert balances
-	for _, user := range []*User{userA, userB} {
+	for _, user := range []BankUser{userA, userB} {
 		latestBalance, err := user.GetAccountBalance()
-		assert.NoError(t, err, "Should be able to get account balance for user %s", user.AccountId)
+		assert.NoError(t, err, "Should be able to get account balance for user %s", user.GetAccountId())
 
 		expectedBalance := user.GetExpectedBalance(scenario.actions)
 		assert.Equal(t, expectedBalance, latestBalance,
-			"Account %s should have correct balance", user.AccountId)
+			"Account %s should have correct balance", user.GetAccountId())
 
-		log.Printf("✓ Account %s has correct balance: %.2f", user.AccountId, latestBalance)
+		log.Printf("✓ Account %s has correct balance: %.2f", user.GetAccountId(), latestBalance)
 	}
 
 	log.Println("🎉 All assertions passed! Test scenario completed successfully.")
@@ -66,15 +66,15 @@ func TestTransferMoneyFromAtoBtoC(t *testing.T) {
 	allActions := append(scenario1.actions, scenario2.actions...)
 
 	// Assert balances
-	for _, user := range []*User{userA, userB, userC} {
+	for _, user := range []BankUser{userA, userB, userC} {
 		latestBalance, err := user.GetAccountBalance()
-		assert.NoError(t, err, "Should be able to get account balance for user %s", user.AccountId)
+		assert.NoError(t, err, "Should be able to get account balance for user %s", user.GetAccountId())
 
 		expectedBalance := user.GetExpectedBalance(allActions)
 		assert.Equal(t, expectedBalance, latestBalance,
-			"Account %s should have correct balance", user.AccountId)
+			"Account %s should have correct balance", user.GetAccountId())
 
-		log.Printf("✓ Account %s has correct balance: %.2f", user.AccountId, latestBalance)
+		log.Printf("✓ Account %s has correct balance: %.2f", user.GetAccountId(), latestBalance)
 	}
 
 	log.Println("🎉 All assertions passed! Test scenario completed successfully.")
@@ -130,14 +130,14 @@ func TestTransferMoneyFromAtoBtoCConcurrently(t *testing.T) {
 			}
 
 			// Assert balances
-			for _, user := range []*User{userA, userB, userC} {
+			for _, user := range []BankUser{userA, userB, userC} {
 				latestBalance, err := user.GetAccountBalance()
-				assert.NoError(t, err, "Should be able to get account balance for user %s", user.AccountId)
-				log.Printf("User %s has balance: %.2f", user.Name, latestBalance)
+				assert.NoError(t, err, "Should be able to get account balance for user %s", user.GetAccountId())
+				log.Printf("User %s has balance: %.2f", user.GetName(), latestBalance)
 
 				expectedBalance := user.GetExpectedBalance(allActions)
 				assert.Equal(t, expectedBalance, latestBalance,
-					"Account %s should have correct balance", user.Name)
+					"Account %s should have correct balance", user.GetName())
 			}
 
 			log.Println("🎉 All assertions passed! Test scenario completed successfully.")

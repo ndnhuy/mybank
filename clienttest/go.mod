@@ -4,7 +4,6 @@ go 1.23.3
 
 require (
 	github.com/stretchr/testify v1.10.0
-	github.com/tsenart/vegeta v12.7.0+incompatible
 	github.com/tsenart/vegeta/v12 v12.12.0
 )
 
