@@ -24,7 +24,7 @@ func TestTransferMoneyFromAtoB(t *testing.T) {
 	assert.NoError(t, err, "Transfer should succeed")
 
 	// Assert balances
-	for _, user := range []BankUser{userA, userB} {
+	for _, user := range []BankOperator{userA, userB} {
 		latestBalance, err := user.GetAccountBalance()
 		assert.NoError(t, err, "Should be able to get account balance for user %s", user.GetAccountId())
 
@@ -66,7 +66,7 @@ func TestTransferMoneyFromAtoBtoC(t *testing.T) {
 	allActions := append(scenario1.actions, scenario2.actions...)
 
 	// Assert balances
-	for _, user := range []BankUser{userA, userB, userC} {
+	for _, user := range []BankOperator{userA, userB, userC} {
 		latestBalance, err := user.GetAccountBalance()
 		assert.NoError(t, err, "Should be able to get account balance for user %s", user.GetAccountId())
 
@@ -130,7 +130,7 @@ func TestTransferMoneyFromAtoBtoCConcurrently(t *testing.T) {
 			}
 
 			// Assert balances
-			for _, user := range []BankUser{userA, userB, userC} {
+			for _, user := range []BankOperator{userA, userB, userC} {
 				latestBalance, err := user.GetAccountBalance()
 				assert.NoError(t, err, "Should be able to get account balance for user %s", user.GetAccountId())
 				log.Printf("User %s has balance: %.2f", user.GetName(), latestBalance)

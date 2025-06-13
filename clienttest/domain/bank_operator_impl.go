@@ -13,7 +13,7 @@ import (
 	"com.ndnhuy.mybank/utils"
 )
 
-type BankUserImpl struct {
+type BankOperatorImpl struct {
 	InitialBalance float64
 	AccountId      string
 	Name           string // Optional alias for the user
@@ -22,11 +22,11 @@ type BankUserImpl struct {
 }
 
 // NewUser creates a new User with the specified initial balance
-func NewUser(initialBalance float64, name string) BankUser {
-	return &BankUserImpl{InitialBalance: initialBalance, Name: name}
+func NewUser(initialBalance float64, name string) BankOperator {
+	return &BankOperatorImpl{InitialBalance: initialBalance, Name: name}
 }
 
-func (u *BankUserImpl) GetAccount(accountID string) (*AccountInfo, error) {
+func (u *BankOperatorImpl) GetAccount(accountID string) (*AccountInfo, error) {
 	resp, err := http.Get(fmt.Sprintf("%s/accounts/%s", utils.BASE_URL, accountID))
 	if err != nil {
 		return nil, fmt.Errorf("failed to get account: %w", err)
@@ -50,7 +50,7 @@ func (u *BankUserImpl) GetAccount(accountID string) (*AccountInfo, error) {
 	return &account, nil
 }
 
-func (u *BankUserImpl) GetAccountBalance() (float64, error) {
+func (u *BankOperatorImpl) GetAccountBalance() (float64, error) {
 	account, err := u.GetAccount(u.AccountId)
 	if err != nil {
 		return 0, fmt.Errorf("failed to get account balance: %w", err)
@@ -58,7 +58,7 @@ func (u *BankUserImpl) GetAccountBalance() (float64, error) {
 	return account.Balance, nil
 }
 
-func (u *BankUserImpl) CreateAccount() (*AccountInfo, error) {
+func (u *BankOperatorImpl) CreateAccount() (*AccountInfo, error) {
 	// validate
 	if u.InitialBalance <= 0 {
 		return nil, fmt.Errorf("initial balance must be greater than zero")
@@ -89,7 +89,7 @@ func (u *BankUserImpl) CreateAccount() (*AccountInfo, error) {
 	return account, nil
 }
 
-func (u *BankUserImpl) createAccountRequest() (*AccountInfo, error) {
+func (u *BankOperatorImpl) createAccountRequest() (*AccountInfo, error) {
 	// Create account with initial balance
 	req := CreateAccountRequest{
 		InitialBalance: u.InitialBalance,
@@ -121,7 +121,7 @@ func (u *BankUserImpl) createAccountRequest() (*AccountInfo, error) {
 	return &account, nil
 }
 
-func (u *BankUserImpl) TransferTo(toUser BankUser, amount float64) error {
+func (u *BankOperatorImpl) TransferTo(toUser BankOperator, amount float64) error {
 	transferReq := TransferRequest{
 		FromAccountID: u.AccountId,
 		ToAccountID:   toUser.GetAccountId(),
@@ -146,7 +146,7 @@ func (u *BankUserImpl) TransferTo(toUser BankUser, amount float64) error {
 	return nil
 }
 
-func (u *BankUserImpl) GetExpectedBalance(actions []action) float64 {
+func (u *BankOperatorImpl) GetExpectedBalance(actions []action) float64 {
 	balance := u.InitialBalance
 	for _, act := range actions {
 		if act.accountId == u.AccountId {
@@ -156,10 +156,10 @@ func (u *BankUserImpl) GetExpectedBalance(actions []action) float64 {
 	return balance
 }
 
-func (u *BankUserImpl) GetAccountId() string {
+func (u *BankOperatorImpl) GetAccountId() string {
 	return u.AccountId
 }
 
-func (u *BankUserImpl) GetName() string {
+func (u *BankOperatorImpl) GetName() string {
 	return u.Name
 }

@@ -15,8 +15,8 @@ type Scenario interface {
 
 type TransferScenario struct {
 	Name     string
-	FromUser BankUser
-	ToUser   BankUser
+	FromUser BankOperator
+	ToUser   BankOperator
 	Amount   float64
 
 	actions []action // actions to be performed in the scenario
