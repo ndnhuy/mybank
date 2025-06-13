@@ -12,8 +12,8 @@ import (
 func TestTransferMoneyFromAtoB(t *testing.T) {
 	log.Println("Starting banking API test scenario...")
 
-	userA := NewUser(100.0, "UserA")
-	userB := NewUser(100.0, "UserB")
+	userA := NewBankOperatorImpl(100.0, "UserA")
+	userB := NewBankOperatorImpl(100.0, "UserB")
 
 	scenario := &TransferScenario{
 		FromUser: userA,
@@ -41,9 +41,9 @@ func TestTransferMoneyFromAtoB(t *testing.T) {
 func TestTransferMoneyFromAtoBtoC(t *testing.T) {
 	log.Println("Starting banking API test scenario...")
 
-	userA := NewUser(100.0, "UserA")
-	userB := NewUser(100.0, "UserB")
-	userC := NewUser(100.0, "UserC")
+	userA := NewBankOperatorImpl(100.0, "UserA")
+	userB := NewBankOperatorImpl(100.0, "UserB")
+	userC := NewBankOperatorImpl(100.0, "UserC")
 
 	scenario1 := &TransferScenario{
 		Name:     "Transfer from A to B, amount=30.5",
@@ -85,9 +85,9 @@ func TestTransferMoneyFromAtoBtoCConcurrently(t *testing.T) {
 		t.Run(fmt.Sprintf("Run #%d", i+1), func(t *testing.T) {
 			log.Println("Starting banking API test scenario...")
 
-			userA := NewUser(100.0, "UserA")
-			userB := NewUser(100.0, "UserB")
-			userC := NewUser(100.0, "UserC")
+			userA := NewBankOperatorImpl(100.0, "UserA")
+			userB := NewBankOperatorImpl(100.0, "UserB")
+			userC := NewBankOperatorImpl(100.0, "UserC")
 
 			scenario1 := &TransferScenario{
 				Name:     "Transfer from A to B, amount=30",

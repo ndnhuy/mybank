@@ -15,15 +15,17 @@ import (
 
 type BankOperatorImpl struct {
 	InitialBalance float64
-	AccountId      string
-	Name           string // Optional alias for the user
+	accountId      string
+	name           string // Optional alias for the user
 
 	mu sync.RWMutex
 }
 
-// NewUser creates a new User with the specified initial balance
-func NewUser(initialBalance float64, name string) BankOperator {
-	return &BankOperatorImpl{InitialBalance: initialBalance, Name: name}
+func NewBankOperatorImpl(initialBalance float64, name string) *BankOperatorImpl {
+	return &BankOperatorImpl{
+		InitialBalance: initialBalance,
+		name:           name,
+	}
 }
 
 func (u *BankOperatorImpl) GetAccount(accountID string) (*AccountInfo, error) {
@@ -51,7 +53,7 @@ func (u *BankOperatorImpl) GetAccount(accountID string) (*AccountInfo, error) {
 }
 
 func (u *BankOperatorImpl) GetAccountBalance() (float64, error) {
-	account, err := u.GetAccount(u.AccountId)
+	account, err := u.GetAccount(u.accountId)
 	if err != nil {
 		return 0, fmt.Errorf("failed to get account balance: %w", err)
 	}
@@ -67,8 +69,8 @@ func (u *BankOperatorImpl) CreateAccount() (*AccountInfo, error) {
 	u.mu.Lock()
 	defer u.mu.Unlock()
 
-	if u.AccountId != "" {
-		accId := u.AccountId
+	if u.accountId != "" {
+		accId := u.accountId
 
 		acc, err := u.GetAccount(accId)
 		if err != nil {
@@ -82,9 +84,9 @@ func (u *BankOperatorImpl) CreateAccount() (*AccountInfo, error) {
 		return nil, err
 	}
 
-	u.AccountId = account.ID
+	u.accountId = account.ID
 
-	log.Printf("[%v] Created account with ID: %s and initial balance: %.2f", u.Name, account.ID, u.InitialBalance)
+	log.Printf("[%v] Created account with ID: %s and initial balance: %.2f", u.name, account.ID, u.InitialBalance)
 
 	return account, nil
 }
@@ -123,7 +125,7 @@ func (u *BankOperatorImpl) createAccountRequest() (*AccountInfo, error) {
 
 func (u *BankOperatorImpl) TransferTo(toUser BankOperator, amount float64) error {
 	transferReq := TransferRequest{
-		FromAccountID: u.AccountId,
+		FromAccountID: u.accountId,
 		ToAccountID:   toUser.GetAccountId(),
 		Amount:        amount,
 	}
@@ -149,7 +151,7 @@ func (u *BankOperatorImpl) TransferTo(toUser BankOperator, amount float64) error
 func (u *BankOperatorImpl) GetExpectedBalance(actions []action) float64 {
 	balance := u.InitialBalance
 	for _, act := range actions {
-		if act.accountId == u.AccountId {
+		if act.accountId == u.accountId {
 			balance += act.balanceChange
 		}
 	}
@@ -157,9 +159,9 @@ func (u *BankOperatorImpl) GetExpectedBalance(actions []action) float64 {
 }
 
 func (u *BankOperatorImpl) GetAccountId() string {
-	return u.AccountId
+	return u.accountId
 }
 
 func (u *BankOperatorImpl) GetName() string {
-	return u.Name
+	return u.name
 }
