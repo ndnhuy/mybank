@@ -148,16 +148,6 @@ func (u *BankOperatorImpl) TransferTo(toUser BankOperator, amount float64) error
 	return nil
 }
 
-func (u *BankOperatorImpl) GetExpectedBalance(actions []action) float64 {
-	balance := u.InitialBalance
-	for _, act := range actions {
-		if act.accountId == u.accountId {
-			balance += act.balanceChange
-		}
-	}
-	return balance
-}
-
 func (u *BankOperatorImpl) GetAccountId() string {
 	return u.accountId
 }

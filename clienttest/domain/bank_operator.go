@@ -6,7 +6,6 @@ type BankOperator interface {
 	GetAccountBalance() (float64, error)
 	CreateAccount() (*AccountInfo, error)
 	TransferTo(toUser BankOperator, amount float64) error
-	GetExpectedBalance(actions []action) float64
 
 	GetAccountId() string
 	GetName() string
