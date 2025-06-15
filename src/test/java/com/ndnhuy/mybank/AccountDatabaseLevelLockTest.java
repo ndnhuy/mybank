@@ -6,6 +6,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
+import com.ndnhuy.mybank.domain.Account;
+import com.ndnhuy.mybank.domain.BankService;
+import com.ndnhuy.mybank.infra.LocalLockService;
+
 import org.junit.jupiter.api.BeforeEach;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

@@ -1,4 +1,4 @@
-package com.ndnhuy.mybank;
+package com.ndnhuy.mybank.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

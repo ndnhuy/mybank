@@ -1,4 +1,4 @@
-package com.ndnhuy.mybank;
+package com.ndnhuy.mybank.infra;
 
 import java.util.ArrayList;
 import java.util.Arrays;
