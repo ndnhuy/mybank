@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import com.ndnhuy.mybank.domain.Account;
 import com.ndnhuy.mybank.domain.BankService;
+import com.ndnhuy.mybank.domain.DefaultBankDeskService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class AccountTest {
+class TransferTest {
 
   private final static String ACCOUNT_ID_PREFIX = "test-account-";
 
@@ -25,6 +25,9 @@ class AccountTest {
 
   @Autowired
   private BankService bankService;
+
+  @Autowired
+  private DefaultBankDeskService bankDeskService;
 
   @Autowired
   private AccountRepository accountRepository;
@@ -58,7 +61,7 @@ class AccountTest {
     Account toAccount = bankService.createAccount(generateAccountId(), 0.0);
 
     // when
-    bankService.transfer(fromAccount.getId(), toAccount.getId(), 30.0);
+    bankDeskService.submitTransfer(fromAccount.getId(), toAccount.getId(), 30.0);
 
     // then
     var fromAccountAfterTransfer = bankService.getAccountInfo(fromAccount.getId());
@@ -74,8 +77,8 @@ class AccountTest {
     Account toAccount = bankService.createAccount(generateAccountId(), 0.0);
 
     // when
-    Thread thread1 = new Thread(() -> bankService.transfer(fromAccount.getId(), toAccount.getId(), 30.0));
-    Thread thread2 = new Thread(() -> bankService.transfer(fromAccount.getId(), toAccount.getId(), 20.0));
+    Thread thread1 = new Thread(() -> bankDeskService.submitTransfer(fromAccount.getId(), toAccount.getId(), 30.0));
+    Thread thread2 = new Thread(() -> bankDeskService.submitTransfer(fromAccount.getId(), toAccount.getId(), 20.0));
 
     thread1.start();
     thread2.start();
@@ -97,8 +100,8 @@ class AccountTest {
     Account toAccount = bankService.createAccount(generateAccountId(), 100.0);
 
     // when
-    Thread thread1 = new Thread(() -> bankService.transfer(fromAccount.getId(), toAccount.getId(), 50.0));
-    Thread thread2 = new Thread(() -> bankService.transfer(toAccount.getId(), fromAccount.getId(), 50.0));
+    Thread thread1 = new Thread(() -> bankDeskService.submitTransfer(fromAccount.getId(), toAccount.getId(), 50.0));
+    Thread thread2 = new Thread(() -> bankDeskService.submitTransfer(toAccount.getId(), fromAccount.getId(), 50.0));
 
     thread1.start();
     thread2.start();
