@@ -1,17 +1,19 @@
 package com.ndnhuy.mybank;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import com.ndnhuy.mybank.domain.Account;
 import com.ndnhuy.mybank.domain.BankService;
 import com.ndnhuy.mybank.domain.DefaultBankDeskService;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import com.ndnhuy.mybank.infra.QueueMetrics;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -32,12 +34,16 @@ class TransferTest {
   @Autowired
   private AccountRepository accountRepository;
 
+  @Autowired
+  private QueueMetrics queueMetrics;
+
   @BeforeEach
   void setUp() {
     var testAccounts = accountRepository.findAll().stream()
         .filter(account -> account.getId().startsWith(ACCOUNT_ID_PREFIX))
         .toList();
     accountRepository.deleteAll(testAccounts);
+    queueMetrics.reset();
   }
 
   @Test
@@ -68,6 +74,9 @@ class TransferTest {
     var toAccountAfterTransfer = bankService.getAccountInfo(toAccount.getId());
     assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(70.0);
     assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(30.0);
+
+    // print metrics
+    queueMetrics.getReport().print();
   }
 
   @Test
@@ -91,6 +100,8 @@ class TransferTest {
     var toAccountAfterTransfer = bankService.getAccountInfo(toAccount.getId());
     assertThat(fromAccountAfterTransfer.getBalance()).isEqualTo(50.0);
     assertThat(toAccountAfterTransfer.getBalance()).isEqualTo(50.0);
+
+    queueMetrics.getReport().print();
   }
 
   @Test

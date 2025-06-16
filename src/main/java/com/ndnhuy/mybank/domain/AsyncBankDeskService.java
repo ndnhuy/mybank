@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.ndnhuy.mybank.TransferRequest;
 import com.ndnhuy.mybank.infra.QueueMetrics;
 
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import jakarta.annotation.PostConstruct;
@@ -26,12 +24,13 @@ public class AsyncBankDeskService implements BankDeskService {
   @Autowired
   private MeterRegistry registry;
 
+  @Autowired
+  private QueueMetrics metrics;
+
   private BlockingQueue<TransferTask> transferQueue = new LinkedBlockingDeque<>(100);
 
   // Track if worker is currently processing a task
   private volatile boolean workerBusy = false;
-
-  private QueueMetrics metrics;
 
   // TransferTask wraps TransferRequest and a FutureTask
   private class TransferTask extends FutureTask<Void> {
@@ -82,19 +81,9 @@ public class AsyncBankDeskService implements BankDeskService {
 
   @PostConstruct
   public void init() {
-    // Initialize metrics after registry is injected
-    this.metrics = QueueMetrics.builder()
-        .transfersSubmitted(Counter.builder("transfers.submitted").register(registry))
-        .submissionTime(Timer.builder("transfers.submission.time").register(registry))
-        .serviceTime(Timer.builder("transfers.service.time").register(registry))
-        .transfersCompleted(Counter.builder("transfers.completed").register(registry))
-        .queueLength(
-            Gauge.builder("transfers.queue.length", transferQueue, q -> q.size()).register(registry))
-        .waitTime(Timer.builder("transfers.wait.time").register(registry))
-        .systemUtilization(
-            Gauge.builder("system.utilization", this, service -> service.workerBusy ? 1.0 : 0.0).register(registry))
-        .build();
-
+    // Set up queue length and system utilization gauges
+    metrics.setQueueLengthGauge(transferQueue, registry);
+    metrics.setSystemUtilizationGauge(() -> workerBusy ? 1.0 : 0.0, registry);
     // Start worker thread
     Thread worker = new Thread(() -> {
       while (true) {
