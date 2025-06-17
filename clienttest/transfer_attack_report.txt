@@ -1,0 +1,37 @@
+==== Transfer Attack Run at 2025-06-17 21:38:44 ===
+Initial Balance: 1000.05, Final Balance: 1500.00
+Requests      [total, rate, throughput]         15, 3.21, 3.19
+Duration      [total, attack, wait]             4.698s, 4.667s, 30.315ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  21.433ms, 36.439ms, 30.763ms, 41.903ms, 94.299ms, 111.764ms, 111.764ms
+Bytes In      [total, mean]                     0, 0.00
+Bytes Out     [total, mean]                     2043, 136.20
+Success       [ratio]                           100.00%
+Status Codes  [code:count]                      200:15  
+Error Set:
+
+
+==== Transfer Attack Run at 2025-06-17 22:06:52 ===
+Initial Balance: 1000.10, Final Balance: 2000.00
+Requests      [total, rate, throughput]         1500, 50.03, 6.02
+Duration      [total, attack, wait]             30.047s, 29.98s, 66.878ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  2.399ms, 94.6ms, 65.256ms, 230.082ms, 374.614ms, 551.538ms, 863.556ms
+Bytes In      [total, mean]                     155642, 103.76
+Bytes Out     [total, mean]                     204185, 136.12
+Success       [ratio]                           12.07%
+Status Codes  [code:count]                      200:181  500:1319  
+Error Set:
+500 
+
+
+==== Transfer Attack Run at 2025-06-17 22:08:13 ===
+Initial Balance: 1000.10, Final Balance: 2000.00
+Requests      [total, rate, throughput]         10, 1.11, 1.11
+Duration      [total, attack, wait]             9.028s, 9.001s, 27.239ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  27.239ms, 36.921ms, 34.772ms, 49.702ms, 60.251ms, 60.251ms, 60.251ms
+Bytes In      [total, mean]                     0, 0.00
+Bytes Out     [total, mean]                     1360, 136.00
+Success       [ratio]                           100.00%
+Status Codes  [code:count]                      200:10  
+Error Set:
+
+

@@ -38,11 +38,6 @@ func (a *Attacker) Attack() {
 		if requestCount%10 == 0 {
 			fmt.Printf(".")
 		}
-
-		// Log any non-200 responses
-		if res.Code != 200 {
-			fmt.Printf("\n⚠️  Non-200 response: %d %s\n", res.Code, res.Error)
-		}
 	}
 }
 

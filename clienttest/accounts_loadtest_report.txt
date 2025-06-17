@@ -17,3 +17,25 @@ Status Codes  [code:count]                      200:300
 Error Set:
 
 
+==== Run at 2025-06-17 21:36:23 ===
+Requests      [total, rate, throughput]         50, 5.10, 5.10
+Duration      [total, attack, wait]             9.806s, 9.8s, 5.941ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  3.015ms, 4.745ms, 4.425ms, 7.013ms, 7.247ms, 8.265ms, 8.265ms
+Bytes In      [total, mean]                     2730200, 54604.00
+Bytes Out     [total, mean]                     0, 0.00
+Success       [ratio]                           100.00%
+Status Codes  [code:count]                      200:50  
+Error Set:
+
+
+==== Run at 2025-06-17 21:38:01 ===
+Requests      [total, rate, throughput]         25, 5.21, 5.20
+Duration      [total, attack, wait]             4.808s, 4.8s, 7.449ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  3.411ms, 7.902ms, 5.539ms, 7.449ms, 22.392ms, 65.943ms, 65.943ms
+Bytes In      [total, mean]                     1365100, 54604.00
+Bytes Out     [total, mean]                     0, 0.00
+Success       [ratio]                           100.00%
+Status Codes  [code:count]                      200:25  
+Error Set:
+
+

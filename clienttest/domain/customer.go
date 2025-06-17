@@ -79,3 +79,18 @@ func (c *Customer) VerifyBalance() error {
 	}
 	return nil
 }
+
+// GetAccountID returns the customer's account ID for load testing
+func (c *Customer) GetAccountID() string {
+	return c.operator.GetAccountId()
+}
+
+// GetCurrentBalance returns the current balance from the bank
+func (c *Customer) GetCurrentBalance() (float64, error) {
+	return c.operator.GetAccountBalance()
+}
+
+// GetName returns the customer's name/alias
+func (c *Customer) GetName() string {
+	return c.operator.GetName()
+}
