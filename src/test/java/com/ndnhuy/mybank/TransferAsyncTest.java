@@ -82,26 +82,28 @@ public class TransferAsyncTest {
     List<Account> sourceAccounts = new ArrayList<>();
     List<Account> destinationAccounts = new ArrayList<>();
 
-    // Create 10 source accounts with $100 each
-    for (int i = 0; i < 10; i++) {
+    var sourceAccountCount = 10;
+    for (int i = 0; i < sourceAccountCount; i++) {
       sourceAccounts.add(bankService.createAccount(generateAccountId(), 100.0));
     }
 
-    // Create 10 destination accounts with $0 each
-    for (int i = 0; i < 10; i++) {
+    var destAccountCount = 10;
+    for (int i = 0; i < destAccountCount; i++) {
       destinationAccounts.add(bankService.createAccount(generateAccountId(), 0.0));
     }
 
     // Concurrent execution setup
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
     AtomicInteger requestCount = new AtomicInteger(0);
-    CountDownLatch allRequestsSubmitted = new CountDownLatch(25); // 25 total requests
+    var totalRequests = 100; // Total number of requests to submit
+    CountDownLatch allRequestsSubmitted = new CountDownLatch(totalRequests);
     List<java.util.concurrent.FutureTask<Void>> futures = new ArrayList<>();
 
     try {
-      // when - submit transfer requests at controlled arrival rate (every 100ms = 10 requests/second)
+      // when - submit transfer requests at controlled arrival rate 
+      var RPS = 50;
       scheduler.scheduleAtFixedRate(() -> {
-        if (requestCount.get() < 25) {
+        if (requestCount.get() < totalRequests) {
           int idx = requestCount.getAndIncrement();
           Account fromAccount = sourceAccounts.get(idx % sourceAccounts.size());
           Account toAccount = destinationAccounts.get(idx % destinationAccounts.size());
@@ -113,7 +115,7 @@ public class TransferAsyncTest {
 
           allRequestsSubmitted.countDown();
         }
-      }, 0, 100, TimeUnit.MILLISECONDS);
+      }, 0, 1000 / RPS, TimeUnit.MILLISECONDS);
 
       // Wait for all requests to be submitted (with timeout)
       boolean submitted = allRequestsSubmitted.await(5, TimeUnit.SECONDS);
@@ -133,8 +135,8 @@ public class TransferAsyncTest {
       var report = queueMetrics.getReport();
 
       // Assert queuing system characteristics
-      assertThat(queueMetrics.getTransfersSubmitted().count()).isEqualTo(25);
-      assertThat(queueMetrics.getTransfersCompleted().count()).isEqualTo(25);
+      assertThat(queueMetrics.getTransfersSubmittedCount()).isEqualTo(totalRequests);
+      assertThat(queueMetrics.getTransfersCompleted().count()).isEqualTo(totalRequests);
       assertThat(queueMetrics.getWaitTime().totalTime(TimeUnit.MILLISECONDS)).isGreaterThan(0); // Queue buildup occurred
       assertThat(queueMetrics.getServiceTime().totalTime(TimeUnit.MILLISECONDS)).isGreaterThan(0);
 
@@ -144,13 +146,20 @@ public class TransferAsyncTest {
         assertThat(updatedAccount.getBalance()).isLessThan(100.0);
       }
 
-      // Verify destination accounts received money
-      double totalReceived = 0;
+      // Verify destination accounts - each should have received money (> 0)
       for (Account destAccount : destinationAccounts) {
         var updatedAccount = bankService.getAccountInfo(destAccount.getId());
-        totalReceived += updatedAccount.getBalance();
+        assertThat(updatedAccount.getBalance()).isGreaterThan(0.0);
       }
-      assertThat(totalReceived).isEqualTo(25.0); // 25 transfers * $1 each
+
+      // Verify total money of all accounts remains constant
+      double totalSourceBalance = sourceAccounts.stream()
+          .mapToDouble(account -> bankService.getAccountInfo(account.getId()).getBalance())
+          .sum();
+      double totalDestinationBalance = destinationAccounts.stream()
+          .mapToDouble(account -> bankService.getAccountInfo(account.getId()).getBalance())
+          .sum();
+      assertThat(totalSourceBalance + totalDestinationBalance).isEqualTo(sourceAccountCount * 100); // initial total money
 
       System.out.println("\n=== Concurrent Transfer Test with Arrival Rate ===");
       report.print();
@@ -159,7 +168,7 @@ public class TransferAsyncTest {
       System.out.printf("Average service time per transfer: %.2f ms%n",
           queueMetrics.getServiceTime().totalTime(TimeUnit.MILLISECONDS)
               / queueMetrics.getTransfersCompleted().count());
-      System.out.printf("Total money transferred: $%.2f%n", totalReceived);
+      System.out.printf("Total money transferred: $%.2f%n", totalDestinationBalance - totalSourceBalance);
 
     } finally {
       if (!scheduler.isShutdown()) {

@@ -21,7 +21,7 @@ public class DefaultBankDeskService implements BankDeskService {
 
   @Override
   public Future<Void> submitTransfer(String fromAccountId, String toAccountId, Double amount) {
-    metrics.getTransfersSubmitted().increment();
+    metrics.recordArrival();
     long start = System.nanoTime();
     bankService.transfer(fromAccountId, toAccountId, amount);
     long duration = System.nanoTime() - start;

@@ -14,6 +14,7 @@ import com.ndnhuy.mybank.infra.QueueMetrics;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import jakarta.annotation.PostConstruct;
+import lombok.SneakyThrows;
 
 @Service
 public class AsyncBankDeskService implements BankDeskService {
@@ -32,7 +33,6 @@ public class AsyncBankDeskService implements BankDeskService {
   // Track if worker is currently processing a task
   private volatile boolean workerBusy = false;
 
-  // TransferTask wraps TransferRequest and a FutureTask
   private class TransferTask extends FutureTask<Void> {
 
     TransferTask(TransferRequest request) {
@@ -42,6 +42,7 @@ public class AsyncBankDeskService implements BankDeskService {
     TransferTask(TransferRequest request, long queuedTime) {
       super(new Callable<Void>() {
         @Override
+        @SneakyThrows
         public Void call() {
           // Calculate wait time from when task was queued until now (when processing starts)
           long waitTime = System.nanoTime() - queuedTime;
@@ -63,7 +64,7 @@ public class AsyncBankDeskService implements BankDeskService {
   public FutureTask<Void> submitTransfer(String fromAccountId, String toAccountId, Double amount) {
     // Record submission processing time (how long it takes to submit)
     Timer.Sample submissionSample = Timer.start(registry);
-    metrics.getTransfersSubmitted().increment();
+    metrics.recordArrival();
 
     TransferRequest request = TransferRequest.builder()
         .fromAccountId(fromAccountId)
@@ -73,7 +74,7 @@ public class AsyncBankDeskService implements BankDeskService {
     TransferTask task = new TransferTask(request);
     transferQueue.add(task);
 
-    // Record submission processing time (renamed from arrivalRate for clarity)
+    // Record submission processing time
     submissionSample.stop(metrics.getSubmissionTime());
 
     return task;

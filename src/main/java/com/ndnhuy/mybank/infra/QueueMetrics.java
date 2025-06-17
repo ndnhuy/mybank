@@ -1,5 +1,8 @@
 package com.ndnhuy.mybank.infra;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.function.Supplier;
+
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -7,15 +10,14 @@ import io.micrometer.core.instrument.Timer;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.function.Supplier;
-
 @Getter
 public class QueueMetrics {
   private final MeterRegistry registry;
 
   // Arrival metrics
+  @lombok.Getter(value = lombok.AccessLevel.PRIVATE)
   private Counter transfersSubmitted;
+
   private Timer submissionTime;
 
   // Service metrics
@@ -31,6 +33,10 @@ public class QueueMetrics {
 
   // Time tracking for rate calculations
   private long startTime;
+
+  // arrival time window
+  private long arrivalWindowStart;
+  private long arrivalWindowEnd;
 
   private Runnable resetMetrics;
 
@@ -90,6 +96,19 @@ public class QueueMetrics {
     }
   }
 
+  public void recordArrival() {
+    transfersSubmitted.increment();
+    long now = System.nanoTime();
+    if (arrivalWindowStart == 0) {
+      arrivalWindowStart = now;
+    }
+    arrivalWindowEnd = now;
+  }
+
+  public double getTransfersSubmittedCount() {
+    return transfersSubmitted.count();
+  }
+
   public Report getReport() {
     return Report.builder()
         .transfersSubmitted(transfersSubmitted.count())
@@ -99,7 +118,7 @@ public class QueueMetrics {
         .queueLength(queueLength != null ? queueLength.value() : 0)
         .waitTimeInMilliseconds(waitTime.totalTime(java.util.concurrent.TimeUnit.MILLISECONDS))
         .systemUtilization(systemUtilization != null ? systemUtilization.value() : 0)
-        .queueMetrics(this)  // Pass reference to parent QueueMetrics
+        .queueMetrics(this) // Pass reference to parent QueueMetrics
         .build();
   }
 
@@ -122,8 +141,9 @@ public class QueueMetrics {
    */
   public double getMeanResponseTime() {
     double completed = transfersCompleted.count();
-    if (completed == 0) return 0;
-    
+    if (completed == 0)
+      return 0;
+
     double totalWaitTime = waitTime.totalTime(java.util.concurrent.TimeUnit.MILLISECONDS);
     double totalServiceTime = serviceTime.totalTime(java.util.concurrent.TimeUnit.MILLISECONDS);
     return (totalWaitTime + totalServiceTime) / completed;
@@ -135,8 +155,9 @@ public class QueueMetrics {
    */
   public double getMeanWaitTime() {
     double completed = transfersCompleted.count();
-    if (completed == 0) return 0;
-    
+    if (completed == 0)
+      return 0;
+
     return waitTime.totalTime(java.util.concurrent.TimeUnit.MILLISECONDS) / completed;
   }
 
@@ -146,8 +167,9 @@ public class QueueMetrics {
    */
   public double getMeanServiceTime() {
     double completed = transfersCompleted.count();
-    if (completed == 0) return 0;
-    
+    if (completed == 0)
+      return 0;
+
     return serviceTime.totalTime(java.util.concurrent.TimeUnit.MILLISECONDS) / completed;
   }
 
@@ -156,9 +178,18 @@ public class QueueMetrics {
    * @return arrival rate in requests/second
    */
   public double getArrivalRate() {
-    double duration = getObservationDurationSeconds();
-    if (duration <= 0) return 0;
-    
+    // double duration = getObservationDurationSeconds();
+    // if (duration <= 0)
+    //   return 0;
+
+    // return transfersSubmitted.count() / duration;
+    if (arrivalWindowStart == 0 || arrivalWindowEnd == 0 || arrivalWindowEnd <= arrivalWindowStart) {
+      return 0;
+    }
+    double duration = (arrivalWindowEnd - arrivalWindowStart) / 1_000_000_000.0; // Convert to seconds
+    if (duration <= 0) {
+      return 0;
+    }
     return transfersSubmitted.count() / duration;
   }
 
@@ -169,8 +200,9 @@ public class QueueMetrics {
    */
   public double getServiceRate() {
     double duration = getObservationDurationSeconds();
-    if (duration <= 0) return 0;
-    
+    if (duration <= 0)
+      return 0;
+
     return transfersCompleted.count() / duration;
   }
 
@@ -192,8 +224,9 @@ public class QueueMetrics {
    */
   public double getTrafficIntensity() {
     double serviceRate = getServiceRate();
-    if (serviceRate <= 0) return Double.POSITIVE_INFINITY;
-    
+    if (serviceRate <= 0)
+      return Double.POSITIVE_INFINITY;
+
     return getArrivalRate() / serviceRate;
   }
 
@@ -207,7 +240,7 @@ public class QueueMetrics {
   public double getAverageQueueLength() {
     double arrivalRate = getArrivalRate();
     double meanWaitTimeSeconds = getMeanWaitTime() / 1000.0; // Convert ms to seconds
-    
+
     return arrivalRate * meanWaitTimeSeconds;
   }
 
@@ -224,7 +257,8 @@ public class QueueMetrics {
    * @return system utilization as percentage (0-100)
    */
   public double getSystemUtilizationPercentage() {
-    if (systemUtilization == null) return 0;
+    if (systemUtilization == null)
+      return 0;
     return systemUtilization.value() * 100;
   }
 
@@ -248,13 +282,13 @@ public class QueueMetrics {
       System.out.println("╔══════════════════════════════════════════════════════════════╗");
       System.out.println("║                    QUEUING SYSTEM ANALYSIS                  ║");
       System.out.println("╚══════════════════════════════════════════════════════════════╝");
-      
+
       // System Overview
       System.out.println("\n📊 SYSTEM OVERVIEW:");
       System.out.printf("   Observation Duration: %.2f seconds%n", queueMetrics.getObservationDurationSeconds());
       System.out.printf("   Requests Submitted:   %.0f%n", transfersSubmitted);
       System.out.printf("   Requests Completed:   %.0f%n", transfersCompleted);
-      
+
       double trafficIntensity = queueMetrics.getTrafficIntensity();
       String systemStatus = getSystemStatus(trafficIntensity);
       System.out.printf("   System Status:        %s%n", systemStatus);
@@ -270,7 +304,8 @@ public class QueueMetrics {
       System.out.println("\n🔬 QUEUING THEORY ANALYSIS:");
       System.out.printf("   Arrival Rate (λ):      %.2f requests/sec%n", queueMetrics.getArrivalRate());
       System.out.printf("   Service Rate (μ):      %.2f requests/sec%n", queueMetrics.getServiceRate());
-      System.out.printf("   Traffic Intensity (ρ): %.3f %s%n", trafficIntensity, getTrafficIntensityWarning(trafficIntensity));
+      System.out.printf("   Traffic Intensity (ρ): %.3f %s%n", trafficIntensity,
+          getTrafficIntensityWarning(trafficIntensity));
       System.out.printf("   Avg Queue Length (L):  %.2f requests%n", queueMetrics.getAverageQueueLength());
       System.out.printf("   Current Queue Length:  %.0f requests%n", queueMetrics.getCurrentQueueLength());
       System.out.printf("   System Utilization:    %.1f%%%n", queueMetrics.getSystemUtilizationPercentage());
@@ -278,7 +313,7 @@ public class QueueMetrics {
       // Performance Assessment
       System.out.println("\n🎯 PERFORMANCE ASSESSMENT:");
       printPerformanceAssessment(queueMetrics);
-      
+
       System.out.println("\n" + "═".repeat(66));
     }
 
@@ -294,15 +329,20 @@ public class QueueMetrics {
     }
 
     private String getSystemStatus(double trafficIntensity) {
-      if (trafficIntensity >= 1.0) return "🔴 OVERLOADED";
-      if (trafficIntensity >= 0.8) return "🟡 HIGH LOAD";
-      if (trafficIntensity >= 0.5) return "🟢 MODERATE LOAD";
+      if (trafficIntensity >= 1.0)
+        return "🔴 OVERLOADED";
+      if (trafficIntensity >= 0.8)
+        return "🟡 HIGH LOAD";
+      if (trafficIntensity >= 0.5)
+        return "🟢 MODERATE LOAD";
       return "🟢 LOW LOAD";
     }
 
     private String getTrafficIntensityWarning(double trafficIntensity) {
-      if (trafficIntensity >= 1.0) return "⚠️  SYSTEM OVERLOADED!";
-      if (trafficIntensity >= 0.8) return "⚠️  Approaching capacity";
+      if (trafficIntensity >= 1.0)
+        return "⚠️  SYSTEM OVERLOADED!";
+      if (trafficIntensity >= 0.8)
+        return "⚠️  Approaching capacity";
       return "✅ Stable";
     }
 
@@ -317,23 +357,32 @@ public class QueueMetrics {
     }
 
     private String assessResponseTime(double responseTime) {
-      if (responseTime < 100) return "🟢 Excellent (< 100ms)";
-      if (responseTime < 500) return "🟡 Good (< 500ms)";
-      if (responseTime < 1000) return "🟠 Fair (< 1s)";
+      if (responseTime < 100)
+        return "🟢 Excellent (< 100ms)";
+      if (responseTime < 500)
+        return "🟡 Good (< 500ms)";
+      if (responseTime < 1000)
+        return "🟠 Fair (< 1s)";
       return "🔴 Poor (> 1s)";
     }
 
     private String assessQueueBuildup(double waitTime) {
-      if (waitTime < 10) return "🟢 Minimal queue buildup";
-      if (waitTime < 100) return "🟡 Moderate queue buildup";
-      if (waitTime < 500) return "🟠 Significant queue buildup";
+      if (waitTime < 10)
+        return "🟢 Minimal queue buildup";
+      if (waitTime < 100)
+        return "🟡 Moderate queue buildup";
+      if (waitTime < 500)
+        return "🟠 Significant queue buildup";
       return "🔴 Severe queue buildup";
     }
 
     private String assessSystemHealth(double trafficIntensity) {
-      if (trafficIntensity >= 1.0) return "🔴 System cannot keep up with demand";
-      if (trafficIntensity >= 0.8) return "🟡 System near capacity, consider scaling";
-      if (trafficIntensity >= 0.5) return "🟢 System handling load well";
+      if (trafficIntensity >= 1.0)
+        return "🔴 System cannot keep up with demand";
+      if (trafficIntensity >= 0.8)
+        return "🟡 System near capacity, consider scaling";
+      if (trafficIntensity >= 0.5)
+        return "🟢 System handling load well";
       return "🟢 System has excess capacity";
     }
   }
