@@ -73,14 +73,18 @@ func (tt *CustomerTransferTargeter) generateTarget() vegeta.Target {
 	// Pick random source and destination customers
 	fromIdx := rand.Intn(len(tt.sourceCustomers))
 	toIdx := rand.Intn(len(tt.destCustomers))
+	fromCustomer := tt.sourceCustomers[fromIdx]
+	toCustomer := tt.destCustomers[toIdx]
 
 	transferReq := domain.TransferRequest{
-		FromAccountID: tt.sourceCustomers[fromIdx].GetAccountID(),
-		ToAccountID:   tt.destCustomers[toIdx].GetAccountID(),
-		Amount:        1.0 + rand.Float64()*9.0, // Random amount between 1.0 and 10.0
+		FromAccountID: fromCustomer.GetAccountID(),
+		ToAccountID:   toCustomer.GetAccountID(),
+		Amount:        1, // Random amount between 1.0 and 10.0
 	}
 
 	body, _ := json.Marshal(transferReq)
+
+	fromCustomer.RecordTransfer(toCustomer, transferReq.Amount) // Record transfer for source customer
 
 	return vegeta.Target{
 		Method: "POST",
@@ -175,12 +179,12 @@ func setupTransferCustomers() (sourceCustomers, destCustomers []*domain.Customer
 
 	// Create destination customers with minimal money
 	for i := 0; i < numDestCustomers; i++ {
-		customer, err := domain.NewCustomerWithAmount(fmt.Sprintf("dest-%d", i), 0.01)
+		customer, err := domain.NewCustomerWithAmount(fmt.Sprintf("dest-%d", i), 1)
 		if err != nil {
 			return nil, nil, 0, fmt.Errorf("failed to create dest customer %d: %w", i, err)
 		}
 		destCustomers = append(destCustomers, customer)
-		totalBalance += 0.01
+		totalBalance += 1
 	}
 
 	return sourceCustomers, destCustomers, totalBalance, nil

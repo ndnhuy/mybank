@@ -29,7 +29,7 @@ public class BankService {
   }
 
   public AccountInfo createAccount(@NonNull Double initialBalance) {
-    var newAcc = doCreateAccount(100.0);
+    var newAcc = doCreateAccount(initialBalance);
     return AccountInfo.builder()
         .id(newAcc.getId())
         .balance(newAcc.getBalance())

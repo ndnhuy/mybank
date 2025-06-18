@@ -55,6 +55,20 @@ func (c *Customer) TransferMoney(toCustomer *Customer, amount float64) error {
 	return nil
 }
 
+func (c *Customer) RecordTransfer(toCustomer *Customer, amount float64) error {
+	// This method is for internal tracking, not for actual transfers
+	if toCustomer == nil || amount <= 0 {
+		return fmt.Errorf("invalid transfer parameters")
+	}
+
+	c.balanceChanges = append(c.balanceChanges, balanceChange{
+		change: -amount, // negative for withdrawal
+	})
+	toCustomer.onReceiveMoney(amount) // notify recipient
+
+	return nil
+}
+
 func (c *Customer) onReceiveMoney(amount float64) {
 	// track balance changes
 	c.balanceChanges = append(c.balanceChanges, balanceChange{
