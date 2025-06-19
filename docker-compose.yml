@@ -14,7 +14,7 @@ services:
     # - SPRING_DATASOURCE_USERNAME=root
     # - SPRING_DATASOURCE_PASSWORD=root
     depends_on:
-      - mysql
+      - mybankdb
     restart: unless-stopped
     cpuset: "0"
     deploy:
@@ -23,7 +23,7 @@ services:
           cpus: "0.2"
     volumes:
       - .data/logs:/app/logs
-  mysql:
+  mybankdb:
     container_name: mybankdb
     image: mysql:8.0.31
     ports:
@@ -34,6 +34,17 @@ services:
     volumes:
       - .data/db:/var/lib/mysql
       - ./deployment/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  dbexporter:
+    container_name: dbexporter
+    image: prom/mysqld-exporter:latest
+    ports:
+      - "9104:9104"
+    volumes:
+      - ./.my.cnf:/.my.cnf
+    depends_on:
+      - mybankdb
+
   prometheus:
     container_name: prometheus
     image: prom/prometheus:latest
