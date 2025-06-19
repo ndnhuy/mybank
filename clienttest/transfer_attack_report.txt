@@ -95,3 +95,28 @@ Status Codes  [code:count]                      200:300
 Error Set:
 
 
+==== Transfer Attack Run at 2025-06-19 10:56:01 ===
+Initial Balance: 1010.00, Final Balance: 1010.00
+Requests      [total, rate, throughput]         300, 30.10, 30.01
+Duration      [total, attack, wait]             9.996s, 9.966s, 29.586ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  20.724ms, 181.346ms, 169.496ms, 296.908ms, 342.407ms, 376.361ms, 574.673ms
+Bytes In      [total, mean]                     0, 0.00
+Bytes Out     [total, mean]                     36000, 120.00
+Success       [ratio]                           100.00%
+Status Codes  [code:count]                      200:300  
+Error Set:
+
+
+==== Transfer Attack Run at 2025-06-19 10:57:23 ===
+Initial Balance: 1010.00, Final Balance: 1010.00
+Requests      [total, rate, throughput]         1500, 50.03, 32.86
+Duration      [total, attack, wait]             30.43s, 29.981s, 449.428ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  18.647ms, 1.497s, 885.523ms, 3.905s, 4.535s, 6.628s, 10.196s
+Bytes In      [total, mean]                     59000, 39.33
+Bytes Out     [total, mean]                     180000, 120.00
+Success       [ratio]                           66.67%
+Status Codes  [code:count]                      200:1000  500:500  
+Error Set:
+500 
+
+

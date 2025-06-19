@@ -1,0 +1,95 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Docker Container Monitoring",
+    "tags": ["docker", "containers"],
+    "style": "dark",
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Container CPU Usage (%)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(container_cpu_usage_seconds_total{name!=\"\"}[5m]) * 100",
+            "legendFormat": "{{name}}",
+            "refId": "A"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "CPU Usage (%)",
+            "max": 100,
+            "min": 0
+          }
+        ],
+        "xAxis": {
+          "show": true
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Container Memory Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "container_memory_usage_bytes{name!=\"\"}",
+            "legendFormat": "{{name}}",
+            "refId": "A"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Memory (Bytes)"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "Container Network I/O",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(container_network_receive_bytes_total{name!=\"\"}[5m])",
+            "legendFormat": "{{name}} - RX",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(container_network_transmit_bytes_total{name!=\"\"}[5m])",
+            "legendFormat": "{{name}} - TX",
+            "refId": "B"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Bytes/sec"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "5s"
+  }
+}
