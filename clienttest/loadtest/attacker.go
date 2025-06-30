@@ -4,15 +4,17 @@ import (
 	"fmt"
 	"time"
 
+	"com.ndnhuy.mybank/utils"
 	vegeta "github.com/tsenart/vegeta/v12/lib"
 )
 
 type Attacker struct {
-	targeter vegeta.Targeter  // Target URL for the load test
-	rate     vegeta.Rate      // Rate of requests per second
-	duration time.Duration    // Duration of the load test in seconds
-	attacker *vegeta.Attacker // Vegeta attacker instance
-	metrics  *vegeta.Metrics  // Pointer to metrics for accumulating results
+	targeter                 vegeta.Targeter  // Target URL for the load test
+	rate                     vegeta.Rate      // Rate of requests per second
+	duration                 time.Duration    // Duration of the load test in seconds
+	attacker                 *vegeta.Attacker // Vegeta attacker instance
+	metrics                  *vegeta.Metrics  // Pointer to metrics for accumulating results
+	customerTransferTargeter *CustomerTransferTargeter
 }
 
 func NewAttacker(targetURL string, method string, rps, durationInSeconds int, metrics *vegeta.Metrics) *Attacker {
@@ -37,6 +39,11 @@ func (a *Attacker) Attack() {
 		// Print progress every 10 requests
 		if requestCount%10 == 0 {
 			fmt.Printf(".")
+		}
+
+		if res.Error == "" && res.Code == 200 {
+			reqId := res.Headers[utils.X_REQUEST_ID][0]
+			a.customerTransferTargeter.GetSuccessCallbackByRequestId(reqId)()
 		}
 	}
 }

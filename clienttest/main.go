@@ -37,9 +37,9 @@ func main() {
 
 	// Check if ATTACK_TYPE is set to "transfers"
 	attackType := os.Getenv("ATTACK_TYPE")
-	if attackType == "transfers" {
-		loadtest.AttackTransfers(rps, testDuration)
-	} else {
+	if attackType == "get_accounts" {
 		loadtest.AttackGetAccounts(rps, testDuration)
+	} else {
+		loadtest.AttackTransfers(rps, testDuration)
 	}
 }

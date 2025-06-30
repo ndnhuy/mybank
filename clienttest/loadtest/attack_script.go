@@ -1,10 +1,7 @@
 package loadtest
 
 import (
-	"encoding/json"
 	"fmt"
-	"math/rand"
-	"net/http"
 	"os"
 	"time"
 
@@ -49,53 +46,6 @@ func AttackGetAccounts(rps, testDuration int) {
 	fmt.Printf("Report appended to accounts_loadtest_report.txt\n")
 }
 
-// CustomerTransferTargeter creates transfer requests using customer behaviors
-type CustomerTransferTargeter struct {
-	sourceCustomers []*domain.Customer
-	destCustomers   []*domain.Customer
-}
-
-// NewCustomerTransferTargeter creates a new customer-based transfer targeter
-func NewCustomerTransferTargeter(sourceCustomers, destCustomers []*domain.Customer) vegeta.Targeter {
-	tt := &CustomerTransferTargeter{
-		sourceCustomers: sourceCustomers,
-		destCustomers:   destCustomers,
-	}
-
-	return func(t *vegeta.Target) error {
-		*t = tt.generateTarget()
-		return nil
-	}
-}
-
-// generateTarget generates a random transfer request using customer account IDs
-func (tt *CustomerTransferTargeter) generateTarget() vegeta.Target {
-	// Pick random source and destination customers
-	fromIdx := rand.Intn(len(tt.sourceCustomers))
-	toIdx := rand.Intn(len(tt.destCustomers))
-	fromCustomer := tt.sourceCustomers[fromIdx]
-	toCustomer := tt.destCustomers[toIdx]
-
-	transferReq := domain.TransferRequest{
-		FromAccountID: fromCustomer.GetAccountID(),
-		ToAccountID:   toCustomer.GetAccountID(),
-		Amount:        1, // Random amount between 1.0 and 10.0
-	}
-
-	body, _ := json.Marshal(transferReq)
-
-	fromCustomer.RecordTransfer(toCustomer, transferReq.Amount) // Record transfer for source customer
-
-	return vegeta.Target{
-		Method: "POST",
-		URL:    utils.BASE_URL + "/accounts/transfer",
-		Header: http.Header{
-			"Content-Type": []string{"application/json"},
-		},
-		Body: body,
-	}
-}
-
 // AttackTransfers simulates simultaneous money transfers between customers
 func AttackTransfers(rps, testDuration int) {
 	fmt.Printf("Starting transfer attack: %d RPS for %d seconds\n", rps, testDuration)
@@ -120,11 +70,12 @@ func AttackTransfers(rps, testDuration int) {
 	// Create customer-based transfer attacker
 	transferTargeter := NewCustomerTransferTargeter(sourceCustomers, destCustomers)
 	attacker := &Attacker{
-		targeter: transferTargeter,
-		rate:     vegeta.Rate{Freq: rps, Per: time.Second},
-		duration: time.Duration(testDuration) * time.Second,
-		attacker: vegeta.NewAttacker(),
-		metrics:  queueMetrics.Metrics,
+		targeter:                 transferTargeter.targeter,
+		customerTransferTargeter: transferTargeter,
+		rate:                     vegeta.Rate{Freq: rps, Per: time.Second},
+		duration:                 time.Duration(testDuration) * time.Second,
+		attacker:                 vegeta.NewAttacker(),
+		metrics:                  queueMetrics.Metrics,
 	}
 
 	attacker.Attack()
@@ -163,9 +114,9 @@ func AttackTransfers(rps, testDuration int) {
 
 // setupTransferCustomers creates test customers for transfer attacks
 func setupTransferCustomers() (sourceCustomers, destCustomers []*domain.Customer, totalBalance float64, err error) {
-	const numSourceCustomers = 10
-	const numDestCustomers = 10
-	const initialBalance = 100.0
+	const numSourceCustomers = 100
+	const numDestCustomers = 100
+	const initialBalance = 1000.0
 
 	// Create source customers with money
 	for i := 0; i < numSourceCustomers; i++ {

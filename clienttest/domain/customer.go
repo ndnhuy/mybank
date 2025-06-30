@@ -43,6 +43,7 @@ func (c *Customer) TransferMoney(toCustomer *Customer, amount float64) error {
 	transferMoney := amount
 	err := c.operator.TransferTo(toCustomer.operator, transferMoney)
 	if err != nil {
+		fmt.Println("Transfer failed:", err)
 		return err
 	} else {
 		// track balance changes

@@ -43,6 +43,21 @@ func TestTransferSequentially(t *testing.T) {
 	assertBalance(t, customerC)
 }
 
+func TestTransferWhenCustomerHasNotEnoughBalance(t *testing.T) {
+	customerA, err := NewCustomerWithAmount("customer A", 100.00)
+	require.NoError(t, err, "Failed to create customer A with zero balance")
+	customerB, err := NewCustomerWithAmount("customer B", 100.00)
+	require.NoError(t, err, "Failed to create customer B with zero balance")
+
+	// Transfer from A to B
+	err = customerA.TransferMoney(customerB, 101.00)
+	assert.Error(t, err, "Transfer from A to B should fail")
+
+	// Verify balances after first transfer
+	assertBalance(t, customerA)
+	assertBalance(t, customerB)
+}
+
 func TestTransferConcurrently(t *testing.T) {
 	for i := 0; i < 5; i++ {
 		t.Run(fmt.Sprintf("Run #%d", i+1), func(t *testing.T) {

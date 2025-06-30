@@ -118,7 +118,7 @@ func (u *BankOperatorImpl) createAccountRequest() (*AccountInfo, error) {
 
 	var account AccountInfo
 	if err := json.Unmarshal(body, &account); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal account info: %w", err)
+		return nil, fmt.Errorf("failed to unmarshal account info: %w, body: %v", err, string(body))
 	}
 	return &account, nil
 }
@@ -141,8 +141,12 @@ func (u *BankOperatorImpl) TransferTo(toUser BankOperator, amount float64) error
 	}
 	defer resp.Body.Close()
 
+	respMsg, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return fmt.Errorf("failed to read response body: %w", err)
+	}
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("transfer failed with status: %d", resp.StatusCode)
+		return fmt.Errorf("transfer failed with status: %d, response: %s", resp.StatusCode, respMsg)
 	}
 
 	return nil
