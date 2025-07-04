@@ -17,10 +17,25 @@ func AttackGetAccounts(rps, testDuration int) {
 	fmt.Printf("Tip: Set RPS=50 DURATION=60 to customize load parameters\n\n")
 
 	queueMetrics := NewQueueMetrics()
+	
+	// Initialize CSV file for time-series data
+	scenario := "accounts"
+	csvFilename := fmt.Sprintf("reports/timeseries_%s.csv", scenario)
+	err := queueMetrics.InitTimeSeriesCSV(csvFilename)
+	if err != nil {
+		fmt.Printf("Warning: Failed to initialize time-series CSV: %v\n", err)
+	}
+	
 	fmt.Printf("Attack in progress...")
 
 	// Create and use Attacker instance
-	attacker := NewAttacker("http://localhost:8080/accounts", "GET", rps, testDuration, queueMetrics.Metrics)
+	attacker := NewAttacker("http://localhost:8080/accounts", "GET", rps, testDuration, queueMetrics.metrics)
+	
+	// Set up time-series callback
+	attacker.SetTimeSeriesCallback(func() {
+		queueMetrics.RecordTimeSeriesPoint()
+	})
+	
 	attacker.Attack()
 	queueMetrics.Close()
 	fmt.Printf(" completed!\n\n")
@@ -40,7 +55,7 @@ func AttackGetAccounts(rps, testDuration int) {
 	timestamp := fmt.Sprintf("==== Run at %s ===\n", time.Now().Format("2006-01-02 15:04:05"))
 	reportFile.WriteString(timestamp)
 
-	reporter := vegeta.NewTextReporter(queueMetrics.Metrics)
+	reporter := vegeta.NewTextReporter(queueMetrics.metrics)
 	reporter(reportFile)
 	reportFile.WriteString("\n\n")
 	fmt.Printf("Report appended to accounts_loadtest_report.txt\n")
@@ -65,6 +80,23 @@ func AttackTransfers(rps, testDuration int) {
 	fmt.Printf("Press Ctrl+C to stop early if needed\n\n")
 
 	queueMetrics := NewQueueMetrics()
+	
+	// Initialize CSV file for time-series data
+	scenario := "custom"
+	if rps == 10 {
+		scenario = "baseline"
+	} else if rps == 50 {
+		scenario = "stress"
+	} else if rps == 100 {
+		scenario = "breaking"
+	}
+	
+	csvFilename := fmt.Sprintf("reports/timeseries_%s.csv", scenario)
+	err = queueMetrics.InitTimeSeriesCSV(csvFilename)
+	if err != nil {
+		fmt.Printf("Warning: Failed to initialize time-series CSV: %v\n", err)
+	}
+	
 	fmt.Printf("Transfer attack in progress...")
 
 	// Create customer-based transfer attacker
@@ -75,8 +107,13 @@ func AttackTransfers(rps, testDuration int) {
 		rate:                     vegeta.Rate{Freq: rps, Per: time.Second},
 		duration:                 time.Duration(testDuration) * time.Second,
 		attacker:                 vegeta.NewAttacker(),
-		metrics:                  queueMetrics.Metrics,
+		metrics:                  queueMetrics.metrics,
 	}
+	
+	// Set up time-series callback
+	attacker.SetTimeSeriesCallback(func() {
+		queueMetrics.RecordTimeSeriesPoint()
+	})
 
 	attacker.Attack()
 	queueMetrics.Close()
@@ -106,7 +143,7 @@ func AttackTransfers(rps, testDuration int) {
 	reportFile.WriteString(timestamp)
 	reportFile.WriteString(fmt.Sprintf("Initial Balance: %.2f, Final Balance: %.2f\n", initialTotal, finalTotal))
 
-	reporter := vegeta.NewTextReporter(queueMetrics.Metrics)
+	reporter := vegeta.NewTextReporter(queueMetrics.metrics)
 	reporter(reportFile)
 	reportFile.WriteString("\n\n")
 	fmt.Printf("Report appended to transfer_attack_report.txt\n")

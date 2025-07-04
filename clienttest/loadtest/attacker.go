@@ -15,6 +15,7 @@ type Attacker struct {
 	attacker                 *vegeta.Attacker // Vegeta attacker instance
 	metrics                  *vegeta.Metrics  // Pointer to metrics for accumulating results
 	customerTransferTargeter *CustomerTransferTargeter
+	timeSeriesCallback       func()           // Callback function to record time-series data
 }
 
 func NewAttacker(targetURL string, method string, rps, durationInSeconds int, metrics *vegeta.Metrics) *Attacker {
@@ -30,8 +31,16 @@ func NewAttacker(targetURL string, method string, rps, durationInSeconds int, me
 	}
 }
 
+// SetTimeSeriesCallback sets the callback function for recording time-series data
+func (a *Attacker) SetTimeSeriesCallback(callback func()) {
+	a.timeSeriesCallback = callback
+}
+
 func (a *Attacker) Attack() {
 	requestCount := 0
+	lastRecordTime := time.Now()
+	recordInterval := 5 * time.Second // Record metrics every 5 seconds
+	
 	for res := range a.attacker.Attack(a.targeter, a.rate, a.duration, "Load Test") {
 		a.metrics.Add(res)
 		requestCount++
@@ -41,10 +50,21 @@ func (a *Attacker) Attack() {
 			fmt.Printf(".")
 		}
 
+		// Record time-series data at regular intervals
+		if time.Since(lastRecordTime) >= recordInterval && a.timeSeriesCallback != nil {
+			a.timeSeriesCallback()
+			lastRecordTime = time.Now()
+		}
+
 		if res.Error == "" && res.Code == 200 {
 			reqId := res.Headers[utils.X_REQUEST_ID][0]
 			a.customerTransferTargeter.GetSuccessCallbackByRequestId(reqId)()
 		}
+	}
+	
+	// Record final data point
+	if a.timeSeriesCallback != nil {
+		a.timeSeriesCallback()
 	}
 }
 
