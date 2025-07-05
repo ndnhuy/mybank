@@ -2,6 +2,7 @@ package loadtest
 
 import (
 	"encoding/csv"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -24,20 +25,25 @@ type TimeSeriesPoint struct {
 // TimeSeriesReport manages time series points and CSV export
 // (extracted from QueueMetrics)
 type TimeSeriesReport struct {
+	name      string
+	dirPath   string // Directory path for CSV files
 	points    []TimeSeriesPoint
 	csvWriter *csv.Writer
 	csvFile   *os.File
 }
 
 // NewTimeSeriesReport creates a new TimeSeriesReport
-func NewTimeSeriesReport() *TimeSeriesReport {
+func NewTimeSeriesReport(name string, dirPath string) *TimeSeriesReport {
 	return &TimeSeriesReport{
-		points: make([]TimeSeriesPoint, 0),
+		points:  make([]TimeSeriesPoint, 0),
+		name:    name,
+		dirPath: dirPath,
 	}
 }
 
 // InitCSV initializes CSV file for time-series data export
-func (tsr *TimeSeriesReport) InitCSV(filepathStr string) error {
+func (tsr *TimeSeriesReport) InitCSV() error {
+	filepathStr := fmt.Sprintf(tsr.dirPath+"/timeseries_%v.csv", tsr.name)
 	dir := filepath.Dir(filepathStr)
 	if dir != "." {
 		if err := os.MkdirAll(dir, 0755); err != nil {
@@ -55,7 +61,15 @@ func (tsr *TimeSeriesReport) InitCSV(filepathStr string) error {
 }
 
 // RecordPoint adds a new time series point and writes to CSV if enabled
-func (tsr *TimeSeriesReport) RecordPoint(point TimeSeriesPoint) {
+func (tsr *TimeSeriesReport) RecordPoint(point TimeSeriesPoint) error {
+	if tsr.csvFile == nil {
+		// Initialize CSV file for time-series data
+		err := tsr.InitCSV()
+		if err != nil {
+			return fmt.Errorf("failed to initialize time-series CSV: %w", err)
+		}
+	}
+
 	tsr.points = append(tsr.points, point)
 	if tsr.csvWriter != nil {
 		record := []string{
@@ -71,6 +85,7 @@ func (tsr *TimeSeriesReport) RecordPoint(point TimeSeriesPoint) {
 		tsr.csvWriter.Write(record)
 		tsr.csvWriter.Flush()
 	}
+	return nil
 }
 
 // Close closes the CSV file if open

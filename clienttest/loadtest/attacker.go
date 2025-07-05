@@ -62,14 +62,20 @@ func (a *Attacker) Attack() {
 
 		// Record time-series data at regular intervals
 		if time.Since(lastRecordTime) >= recordInterval && a.timeSeriesReport != nil {
-			a.timeSeriesReport.RecordPoint(a.getCurrentTimeseriesPoint())
+			err := a.timeSeriesReport.RecordPoint(a.getCurrentTimeseriesPoint())
+			if err != nil {
+				fmt.Printf("Error recording time series point: %v\n", err)
+			}
 			lastRecordTime = time.Now()
 		}
 	}
 
 	// Record final data point
 	if a.timeSeriesReport != nil {
-		a.timeSeriesReport.RecordPoint(a.getCurrentTimeseriesPoint())
+		err := a.timeSeriesReport.RecordPoint(a.getCurrentTimeseriesPoint())
+		if err != nil {
+			fmt.Printf("Error recording time series point: %v\n", err)
+		}
 	}
 }
 

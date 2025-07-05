@@ -29,15 +29,8 @@ func AttackTransfers(rps, testDuration int) {
 	fmt.Printf("Press Ctrl+C to stop early if needed\n\n")
 
 	queueMetrics := NewQueueMetrics()
-	timeSeriesReport := NewTimeSeriesReport()
-
-	// Initialize CSV file for time-series data
 	dt := time.Now().Format("20060102_150405")
-	csvFilename := fmt.Sprintf("reports/timeseries/%v/timeseries_rps_%v_duration_%v.csv", dt, rps, testDuration)
-	err = timeSeriesReport.InitCSV(csvFilename)
-	if err != nil {
-		fmt.Printf("Warning: Failed to initialize time-series CSV: %v\n", err)
-	}
+	timeSeriesReport := NewTimeSeriesReport("transfer_attack_test", fmt.Sprintf("reports/timeseries/%v", dt))
 
 	fmt.Printf("Transfer attack in progress...")
 
