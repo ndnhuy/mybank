@@ -11,5 +11,6 @@
   "go.testFlags": [
     "-count=1"
   ],
-  "diffEditor.renderSideBySide": true
+  "diffEditor.renderSideBySide": true,
+  "makefile.configureOnOpen": false
 }
