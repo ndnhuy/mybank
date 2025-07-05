@@ -1,113 +1,29 @@
 package loadtest
 
 import (
-	"encoding/csv"
 	"fmt"
-	"os"
-	"strconv"
 	"strings"
 	"time"
 
 	vegeta "github.com/tsenart/vegeta/v12/lib"
 )
 
-// TimeSeriesPoint represents a single measurement point in time
-type TimeSeriesPoint struct {
-	Timestamp    time.Time
-	Elapsed      float64 // seconds since start
-	MeanLatency  float64 // milliseconds
-	P95Latency   float64 // milliseconds
-	P99Latency   float64 // milliseconds
-	Throughput   float64 // requests/second
-	SuccessRate  float64 // percentage
-	RequestCount int64
-}
-
 // QueueMetrics wraps vegeta.Metrics with additional queuing theory calculations
 type QueueMetrics struct {
-	metrics     *vegeta.Metrics
-	startTime   time.Time
-	timeSeries  []TimeSeriesPoint
-	csvWriter   *csv.Writer
-	csvFile     *os.File
+	metrics   *vegeta.Metrics
+	startTime time.Time
 }
 
 // NewQueueMetrics creates a new QueueMetrics instance
 func NewQueueMetrics() *QueueMetrics {
 	return &QueueMetrics{
-		metrics:    &vegeta.Metrics{},
-		startTime:  time.Now(),
-		timeSeries: make([]TimeSeriesPoint, 0),
+		metrics:   &vegeta.Metrics{},
+		startTime: time.Now(),
 	}
-}
-
-// InitTimeSeriesCSV initializes CSV file for time-series data export
-func (qm *QueueMetrics) InitTimeSeriesCSV(filename string) error {
-	file, err := os.Create(filename)
-	if err != nil {
-		return fmt.Errorf("failed to create CSV file: %w", err)
-	}
-	
-	qm.csvFile = file
-	qm.csvWriter = csv.NewWriter(file)
-	
-	// Write CSV header
-	header := []string{"Timestamp", "Elapsed_Seconds", "Mean_Latency_Ms", "P95_Latency_Ms", "P99_Latency_Ms", "Throughput_RPS", "Success_Rate_Percent", "Request_Count"}
-	return qm.csvWriter.Write(header)
-}
-
-// RecordTimeSeriesPoint captures current metrics state
-func (qm *QueueMetrics) RecordTimeSeriesPoint() {
-	now := time.Now()
-	elapsed := now.Sub(qm.startTime).Seconds()
-	
-	// Create a snapshot of the current metrics to finalize without affecting the original
-	snapshot := qm.createMetricsSnapshot()
-	snapshot.Close() // Finalize the snapshot to get accurate latency percentiles
-	
-	point := TimeSeriesPoint{
-		Timestamp:    now,
-		Elapsed:      elapsed,
-		MeanLatency:  float64(snapshot.Latencies.Mean.Nanoseconds()) / 1e6, // Convert to milliseconds
-		P95Latency:   float64(snapshot.Latencies.P95.Nanoseconds()) / 1e6,
-		P99Latency:   float64(snapshot.Latencies.P99.Nanoseconds()) / 1e6,
-		Throughput:   snapshot.Throughput,
-		SuccessRate:  snapshot.Success * 100,
-		RequestCount: int64(snapshot.Requests),
-	}
-	
-	qm.timeSeries = append(qm.timeSeries, point)
-	
-	// Write to CSV if initialized
-	if qm.csvWriter != nil {
-		record := []string{
-			point.Timestamp.Format(time.RFC3339),
-			strconv.FormatFloat(point.Elapsed, 'f', 2, 64),
-			strconv.FormatFloat(point.MeanLatency, 'f', 2, 64),
-			strconv.FormatFloat(point.P95Latency, 'f', 2, 64),
-			strconv.FormatFloat(point.P99Latency, 'f', 2, 64),
-			strconv.FormatFloat(point.Throughput, 'f', 2, 64),
-			strconv.FormatFloat(point.SuccessRate, 'f', 2, 64),
-			strconv.FormatInt(point.RequestCount, 10),
-		}
-		qm.csvWriter.Write(record)
-		qm.csvWriter.Flush()
-	}
-}
-
-// createMetricsSnapshot creates a snapshot by recreating metrics from stored results
-func (qm *QueueMetrics) createMetricsSnapshot() *vegeta.Metrics {
-	return qm.metrics
 }
 
 // Close properly closes CSV file and cleans up resources
 func (qm *QueueMetrics) Close() {
-	if qm.csvWriter != nil {
-		qm.csvWriter.Flush()
-	}
-	if qm.csvFile != nil {
-		qm.csvFile.Close()
-	}
 	// Close vegeta metrics to finalize the data
 	qm.metrics.Close()
 }
@@ -214,23 +130,6 @@ func (qm *QueueMetrics) PrintReport() {
 	fmt.Printf("   Response Time:  %s\n", qm.AssessResponseTime())
 	fmt.Printf("   System Health:  %s\n", qm.AssessSystemHealth())
 
-	// Time Series Analysis
-	if len(qm.timeSeries) > 0 {
-		fmt.Println("\n📈 TIME SERIES ANALYSIS:")
-		firstPoint := qm.timeSeries[0]
-		lastPoint := qm.timeSeries[len(qm.timeSeries)-1]
-		fmt.Printf("   Time Series Points:   %d\n", len(qm.timeSeries))
-		fmt.Printf("   Initial Mean Latency: %.2f ms\n", firstPoint.MeanLatency)
-		fmt.Printf("   Final Mean Latency:   %.2f ms\n", lastPoint.MeanLatency)
-		fmt.Printf("   Initial P95 Latency:  %.2f ms\n", firstPoint.P95Latency)
-		fmt.Printf("   Final P95 Latency:    %.2f ms\n", lastPoint.P95Latency)
-		
-		if firstPoint.MeanLatency > 0 {
-			latencyIncrease := ((lastPoint.MeanLatency - firstPoint.MeanLatency) / firstPoint.MeanLatency) * 100
-			fmt.Printf("   Mean Latency Change:  %.1f%%\n", latencyIncrease)
-		}
-	}
-
 	// Warnings
 	if qm.metrics.Success < 1.0 {
 		fmt.Printf("\n⚠️  Warning: Success rate is %.2f%%. Some requests failed!\n", qm.metrics.Success*100)
@@ -240,4 +139,16 @@ func (qm *QueueMetrics) PrintReport() {
 	}
 
 	fmt.Println("\n" + strings.Repeat("═", 66))
+}
+
+// Expose a public method to get a finalized snapshot of vegeta.Metrics
+func (qm *QueueMetrics) Snapshot() *vegeta.Metrics {
+	snapshot := qm.createMetricsSnapshot()
+	snapshot.Close() // Finalize the snapshot for accurate percentiles
+	return snapshot
+}
+
+// createMetricsSnapshot creates a snapshot by recreating metrics from stored results
+func (qm *QueueMetrics) createMetricsSnapshot() *vegeta.Metrics {
+	return qm.metrics
 }
