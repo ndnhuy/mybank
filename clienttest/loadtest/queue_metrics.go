@@ -143,12 +143,7 @@ func (qm *QueueMetrics) PrintReport() {
 
 // Expose a public method to get a finalized snapshot of vegeta.Metrics
 func (qm *QueueMetrics) Snapshot() *vegeta.Metrics {
-	snapshot := qm.createMetricsSnapshot()
+	snapshot := qm.metrics
 	snapshot.Close() // Finalize the snapshot for accurate percentiles
 	return snapshot
-}
-
-// createMetricsSnapshot creates a snapshot by recreating metrics from stored results
-func (qm *QueueMetrics) createMetricsSnapshot() *vegeta.Metrics {
-	return qm.metrics
 }

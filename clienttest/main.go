@@ -35,11 +35,5 @@ func getConfigFromEnv() (int, int) {
 func main() {
 	rps, testDuration := getConfigFromEnv()
 
-	// Check if ATTACK_TYPE is set to "transfers"
-	attackType := os.Getenv("ATTACK_TYPE")
-	if attackType == "get_accounts" {
-		loadtest.AttackGetAccounts(rps, testDuration)
-	} else {
-		loadtest.AttackTransfers(rps, testDuration)
-	}
+	loadtest.AttackTransfers(rps, testDuration)
 }

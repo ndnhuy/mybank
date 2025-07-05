@@ -1,212 +1,212 @@
-Starting transfer attack: 10 RPS for 60 seconds
+Starting transfer attack: 10 RPS for 10 seconds
 Setting up test customers...
 Created 100 source customers and 100 destination customers
 Total initial balance: 100100.00
 Target URL: http://localhost:8080/accounts/transfer
 Press Ctrl+C to stop early if needed
 
-Transfer attack in progress............................................................... completed!
+Transfer attack in progress............. completed!
 
-[source-0] balance verified: 987.00
-[source-1] balance verified: 996.00
-[source-2] balance verified: 995.00
-[source-3] balance verified: 994.00
-[source-4] balance verified: 994.00
-[source-5] balance verified: 995.00
-[source-6] balance verified: 992.00
-[source-7] balance verified: 993.00
-[source-8] balance verified: 994.00
-[source-9] balance verified: 996.00
-[source-10] balance verified: 993.00
-[source-11] balance verified: 993.00
-[source-12] balance verified: 997.00
-[source-13] balance verified: 991.00
-[source-14] balance verified: 994.00
-[source-15] balance verified: 992.00
-[source-16] balance verified: 995.00
-[source-17] balance verified: 992.00
-[source-18] balance verified: 996.00
-[source-19] balance verified: 997.00
-[source-20] balance verified: 996.00
-[source-21] balance verified: 996.00
-[source-22] balance verified: 994.00
-[source-23] balance verified: 995.00
-[source-24] balance verified: 994.00
-[source-25] balance verified: 994.00
-[source-26] balance verified: 994.00
-[source-27] balance verified: 992.00
-[source-28] balance verified: 992.00
-[source-29] balance verified: 992.00
-[source-30] balance verified: 996.00
-[source-31] balance verified: 994.00
-[source-32] balance verified: 995.00
-[source-33] balance verified: 994.00
-[source-34] balance verified: 999.00
-[source-35] balance verified: 993.00
-[source-36] balance verified: 991.00
-[source-37] balance verified: 994.00
-[source-38] balance verified: 989.00
-[source-39] balance verified: 995.00
-[source-40] balance verified: 991.00
-[source-41] balance verified: 996.00
-[source-42] balance verified: 998.00
-[source-43] balance verified: 996.00
-[source-44] balance verified: 992.00
-[source-45] balance verified: 992.00
-[source-46] balance verified: 995.00
-[source-47] balance verified: 991.00
-[source-48] balance verified: 990.00
-[source-49] balance verified: 996.00
-[source-50] balance verified: 997.00
-[source-51] balance verified: 997.00
-[source-52] balance verified: 994.00
-[source-53] balance verified: 994.00
-[source-54] balance verified: 991.00
-[source-55] balance verified: 997.00
-[source-56] balance verified: 992.00
-[source-57] balance verified: 984.00
-[source-58] balance verified: 992.00
-[source-59] balance verified: 995.00
-[source-60] balance verified: 996.00
-[source-61] balance verified: 994.00
-[source-62] balance verified: 997.00
-[source-63] balance verified: 993.00
-[source-64] balance verified: 996.00
-[source-65] balance verified: 997.00
-[source-66] balance verified: 997.00
-[source-67] balance verified: 995.00
-[source-68] balance verified: 995.00
-[source-69] balance verified: 993.00
-[source-70] balance verified: 996.00
-[source-71] balance verified: 989.00
-[source-72] balance verified: 995.00
-[source-73] balance verified: 989.00
-[source-74] balance verified: 993.00
-[source-75] balance verified: 991.00
-[source-76] balance verified: 994.00
-[source-77] balance verified: 992.00
-[source-78] balance verified: 994.00
-[source-79] balance verified: 997.00
-[source-80] balance verified: 997.00
-[source-81] balance verified: 995.00
-[source-82] balance verified: 997.00
-[source-83] balance verified: 997.00
-[source-84] balance verified: 992.00
-[source-85] balance verified: 996.00
-[source-86] balance verified: 994.00
-[source-87] balance verified: 993.00
-[source-88] balance verified: 994.00
-[source-89] balance verified: 997.00
-[source-90] balance verified: 994.00
-[source-91] balance verified: 987.00
-[source-92] balance verified: 994.00
-[source-93] balance verified: 996.00
-[source-94] balance verified: 994.00
-[source-95] balance verified: 998.00
-[source-96] balance verified: 990.00
-[source-97] balance verified: 996.00
-[source-98] balance verified: 996.00
-[source-99] balance verified: 995.00
-[dest-0] balance verified: 10.00
-[dest-1] balance verified: 13.00
-[dest-2] balance verified: 7.00
-[dest-3] balance verified: 11.00
-[dest-4] balance verified: 9.00
-[dest-5] balance verified: 5.00
-[dest-6] balance verified: 7.00
-[dest-7] balance verified: 3.00
-[dest-8] balance verified: 9.00
-[dest-9] balance verified: 13.00
-[dest-10] balance verified: 6.00
-[dest-11] balance verified: 5.00
-[dest-12] balance verified: 5.00
-[dest-13] balance verified: 2.00
-[dest-14] balance verified: 6.00
-[dest-15] balance verified: 7.00
-[dest-16] balance verified: 5.00
-[dest-17] balance verified: 7.00
-[dest-18] balance verified: 7.00
-[dest-19] balance verified: 7.00
-[dest-20] balance verified: 7.00
-[dest-21] balance verified: 9.00
-[dest-22] balance verified: 8.00
-[dest-23] balance verified: 11.00
-[dest-24] balance verified: 9.00
-[dest-25] balance verified: 5.00
-[dest-26] balance verified: 12.00
-[dest-27] balance verified: 9.00
-[dest-28] balance verified: 6.00
-[dest-29] balance verified: 6.00
-[dest-30] balance verified: 4.00
-[dest-31] balance verified: 5.00
-[dest-32] balance verified: 10.00
-[dest-33] balance verified: 5.00
-[dest-34] balance verified: 5.00
-[dest-35] balance verified: 4.00
-[dest-36] balance verified: 5.00
-[dest-37] balance verified: 11.00
-[dest-38] balance verified: 6.00
-[dest-39] balance verified: 8.00
-[dest-40] balance verified: 10.00
-[dest-41] balance verified: 3.00
-[dest-42] balance verified: 5.00
-[dest-43] balance verified: 6.00
-[dest-44] balance verified: 8.00
-[dest-45] balance verified: 5.00
-[dest-46] balance verified: 7.00
-[dest-47] balance verified: 6.00
-[dest-48] balance verified: 7.00
-[dest-49] balance verified: 9.00
-[dest-50] balance verified: 9.00
-[dest-51] balance verified: 10.00
-[dest-52] balance verified: 5.00
-[dest-53] balance verified: 5.00
-[dest-54] balance verified: 9.00
-[dest-55] balance verified: 6.00
-[dest-56] balance verified: 6.00
-[dest-57] balance verified: 15.00
-[dest-58] balance verified: 4.00
-[dest-59] balance verified: 6.00
-[dest-60] balance verified: 7.00
-[dest-61] balance verified: 9.00
-[dest-62] balance verified: 6.00
-[dest-63] balance verified: 5.00
-[dest-64] balance verified: 6.00
-[dest-65] balance verified: 8.00
-[dest-66] balance verified: 8.00
-[dest-67] balance verified: 7.00
-[dest-68] balance verified: 5.00
-[dest-69] balance verified: 9.00
-[dest-70] balance verified: 3.00
-[dest-71] balance verified: 7.00
-[dest-72] balance verified: 5.00
-[dest-73] balance verified: 6.00
-[dest-74] balance verified: 5.00
-[dest-75] balance verified: 11.00
-[dest-76] balance verified: 10.00
-[dest-77] balance verified: 8.00
-[dest-78] balance verified: 3.00
-[dest-79] balance verified: 9.00
-[dest-80] balance verified: 11.00
-[dest-81] balance verified: 8.00
-[dest-82] balance verified: 6.00
-[dest-83] balance verified: 5.00
-[dest-84] balance verified: 7.00
-[dest-85] balance verified: 5.00
-[dest-86] balance verified: 7.00
-[dest-87] balance verified: 3.00
-[dest-88] balance verified: 3.00
-[dest-89] balance verified: 6.00
-[dest-90] balance verified: 6.00
-[dest-91] balance verified: 7.00
-[dest-92] balance verified: 10.00
-[dest-93] balance verified: 10.00
-[dest-94] balance verified: 4.00
-[dest-95] balance verified: 9.00
-[dest-96] balance verified: 1.00
-[dest-97] balance verified: 4.00
-[dest-98] balance verified: 11.00
-[dest-99] balance verified: 10.00
+[source-0] balance verified: 999.00
+[source-1] balance verified: 999.00
+[source-2] balance verified: 998.00
+[source-3] balance verified: 1000.00
+[source-4] balance verified: 998.00
+[source-5] balance verified: 999.00
+[source-6] balance verified: 1000.00
+[source-7] balance verified: 1000.00
+[source-8] balance verified: 998.00
+[source-9] balance verified: 1000.00
+[source-10] balance verified: 1000.00
+[source-11] balance verified: 999.00
+[source-12] balance verified: 1000.00
+[source-13] balance verified: 997.00
+[source-14] balance verified: 999.00
+[source-15] balance verified: 998.00
+[source-16] balance verified: 999.00
+[source-17] balance verified: 1000.00
+[source-18] balance verified: 999.00
+[source-19] balance verified: 1000.00
+[source-20] balance verified: 998.00
+[source-21] balance verified: 998.00
+[source-22] balance verified: 999.00
+[source-23] balance verified: 999.00
+[source-24] balance verified: 998.00
+[source-25] balance verified: 1000.00
+[source-26] balance verified: 999.00
+[source-27] balance verified: 999.00
+[source-28] balance verified: 999.00
+[source-29] balance verified: 1000.00
+[source-30] balance verified: 1000.00
+[source-31] balance verified: 1000.00
+[source-32] balance verified: 998.00
+[source-33] balance verified: 998.00
+[source-34] balance verified: 998.00
+[source-35] balance verified: 997.00
+[source-36] balance verified: 1000.00
+[source-37] balance verified: 1000.00
+[source-38] balance verified: 999.00
+[source-39] balance verified: 997.00
+[source-40] balance verified: 1000.00
+[source-41] balance verified: 999.00
+[source-42] balance verified: 995.00
+[source-43] balance verified: 1000.00
+[source-44] balance verified: 999.00
+[source-45] balance verified: 1000.00
+[source-46] balance verified: 1000.00
+[source-47] balance verified: 1000.00
+[source-48] balance verified: 999.00
+[source-49] balance verified: 1000.00
+[source-50] balance verified: 999.00
+[source-51] balance verified: 1000.00
+[source-52] balance verified: 999.00
+[source-53] balance verified: 999.00
+[source-54] balance verified: 998.00
+[source-55] balance verified: 999.00
+[source-56] balance verified: 999.00
+[source-57] balance verified: 999.00
+[source-58] balance verified: 998.00
+[source-59] balance verified: 999.00
+[source-60] balance verified: 998.00
+[source-61] balance verified: 999.00
+[source-62] balance verified: 1000.00
+[source-63] balance verified: 1000.00
+[source-64] balance verified: 999.00
+[source-65] balance verified: 999.00
+[source-66] balance verified: 1000.00
+[source-67] balance verified: 999.00
+[source-68] balance verified: 998.00
+[source-69] balance verified: 998.00
+[source-70] balance verified: 998.00
+[source-71] balance verified: 1000.00
+[source-72] balance verified: 1000.00
+[source-73] balance verified: 1000.00
+[source-74] balance verified: 999.00
+[source-75] balance verified: 998.00
+[source-76] balance verified: 1000.00
+[source-77] balance verified: 1000.00
+[source-78] balance verified: 998.00
+[source-79] balance verified: 998.00
+[source-80] balance verified: 999.00
+[source-81] balance verified: 999.00
+[source-82] balance verified: 999.00
+[source-83] balance verified: 998.00
+[source-84] balance verified: 1000.00
+[source-85] balance verified: 999.00
+[source-86] balance verified: 1000.00
+[source-87] balance verified: 997.00
+[source-88] balance verified: 999.00
+[source-89] balance verified: 998.00
+[source-90] balance verified: 998.00
+[source-91] balance verified: 999.00
+[source-92] balance verified: 998.00
+[source-93] balance verified: 999.00
+[source-94] balance verified: 1000.00
+[source-95] balance verified: 1000.00
+[source-96] balance verified: 1000.00
+[source-97] balance verified: 1000.00
+[source-98] balance verified: 998.00
+[source-99] balance verified: 1000.00
+[dest-0] balance verified: 1.00
+[dest-1] balance verified: 2.00
+[dest-2] balance verified: 2.00
+[dest-3] balance verified: 2.00
+[dest-4] balance verified: 1.00
+[dest-5] balance verified: 4.00
+[dest-6] balance verified: 2.00
+[dest-7] balance verified: 2.00
+[dest-8] balance verified: 2.00
+[dest-9] balance verified: 1.00
+[dest-10] balance verified: 1.00
+[dest-11] balance verified: 1.00
+[dest-12] balance verified: 2.00
+[dest-13] balance verified: 1.00
+[dest-14] balance verified: 1.00
+[dest-15] balance verified: 2.00
+[dest-16] balance verified: 2.00
+[dest-17] balance verified: 1.00
+[dest-18] balance verified: 1.00
+[dest-19] balance verified: 2.00
+[dest-20] balance verified: 3.00
+[dest-21] balance verified: 1.00
+[dest-22] balance verified: 3.00
+[dest-23] balance verified: 1.00
+[dest-24] balance verified: 4.00
+[dest-25] balance verified: 1.00
+[dest-26] balance verified: 3.00
+[dest-27] balance verified: 3.00
+[dest-28] balance verified: 1.00
+[dest-29] balance verified: 1.00
+[dest-30] balance verified: 2.00
+[dest-31] balance verified: 2.00
+[dest-32] balance verified: 3.00
+[dest-33] balance verified: 1.00
+[dest-34] balance verified: 2.00
+[dest-35] balance verified: 2.00
+[dest-36] balance verified: 2.00
+[dest-37] balance verified: 3.00
+[dest-38] balance verified: 1.00
+[dest-39] balance verified: 5.00
+[dest-40] balance verified: 4.00
+[dest-41] balance verified: 2.00
+[dest-42] balance verified: 2.00
+[dest-43] balance verified: 1.00
+[dest-44] balance verified: 2.00
+[dest-45] balance verified: 2.00
+[dest-46] balance verified: 2.00
+[dest-47] balance verified: 1.00
+[dest-48] balance verified: 2.00
+[dest-49] balance verified: 2.00
+[dest-50] balance verified: 3.00
+[dest-51] balance verified: 1.00
+[dest-52] balance verified: 3.00
+[dest-53] balance verified: 1.00
+[dest-54] balance verified: 1.00
+[dest-55] balance verified: 2.00
+[dest-56] balance verified: 4.00
+[dest-57] balance verified: 1.00
+[dest-58] balance verified: 1.00
+[dest-59] balance verified: 2.00
+[dest-60] balance verified: 1.00
+[dest-61] balance verified: 2.00
+[dest-62] balance verified: 4.00
+[dest-63] balance verified: 1.00
+[dest-64] balance verified: 2.00
+[dest-65] balance verified: 2.00
+[dest-66] balance verified: 3.00
+[dest-67] balance verified: 1.00
+[dest-68] balance verified: 4.00
+[dest-69] balance verified: 2.00
+[dest-70] balance verified: 1.00
+[dest-71] balance verified: 1.00
+[dest-72] balance verified: 1.00
+[dest-73] balance verified: 1.00
+[dest-74] balance verified: 2.00
+[dest-75] balance verified: 1.00
+[dest-76] balance verified: 4.00
+[dest-77] balance verified: 2.00
+[dest-78] balance verified: 2.00
+[dest-79] balance verified: 2.00
+[dest-80] balance verified: 1.00
+[dest-81] balance verified: 3.00
+[dest-82] balance verified: 2.00
+[dest-83] balance verified: 2.00
+[dest-84] balance verified: 2.00
+[dest-85] balance verified: 3.00
+[dest-86] balance verified: 2.00
+[dest-87] balance verified: 4.00
+[dest-88] balance verified: 2.00
+[dest-89] balance verified: 2.00
+[dest-90] balance verified: 3.00
+[dest-91] balance verified: 3.00
+[dest-92] balance verified: 1.00
+[dest-93] balance verified: 1.00
+[dest-94] balance verified: 2.00
+[dest-95] balance verified: 1.00
+[dest-96] balance verified: 2.00
+[dest-97] balance verified: 2.00
+[dest-98] balance verified: 4.00
+[dest-99] balance verified: 3.00
 ✅ All customer balances verified successfully
 Final total balance: 100100.00
 ✅ Balance verification passed - no money lost or created
@@ -215,36 +215,28 @@ Final total balance: 100100.00
 ╚══════════════════════════════════════════════════════════════╝
 
 📊 SYSTEM OVERVIEW:
-   Observation Duration: 59.900012919s
-   Requests Submitted:   600
-   Requests Completed:   600
+   Observation Duration: 9.900123209s
+   Requests Submitted:   100
+   Requests Completed:   100
    System Status:        🔴 OVERLOADED
 
 ⚡ PERFORMANCE METRICS:
-   Mean Response Time:   17.940617ms
-   50th percentile:      17.728525ms
-   95th percentile:      23.431033ms
-   99th percentile:      25.125736ms
-   Max Response Time:    93.522682ms
+   Mean Response Time:   13.793829ms
+   50th percentile:      13.352964ms
+   95th percentile:      18.274983ms
+   99th percentile:      22.883183ms
+   Max Response Time:    23.033662ms
    Success Rate:         100.00%
 
 🔬 QUEUING THEORY ANALYSIS:
-   Arrival Rate (λ):      10.02 requests/sec
-   Service Rate (μ):      10.01 requests/sec
-   Traffic Intensity (ρ): 1.000
-   Throughput:           10.01 requests/sec
+   Arrival Rate (λ):      10.10 requests/sec
+   Service Rate (μ):      10.09 requests/sec
+   Traffic Intensity (ρ): 1.001
+   Throughput:           10.09 requests/sec
 
 🎯 PERFORMANCE ASSESSMENT:
    Response Time:  🟢 Excellent (< 100ms)
    System Health:  🔴 System cannot keep up with demand
-
-📈 TIME SERIES ANALYSIS:
-   Time Series Points:   12
-   Initial Mean Latency: 18.12 ms
-   Final Mean Latency:   17.94 ms
-   Initial P95 Latency:  23.20 ms
-   Final P95 Latency:    23.43 ms
-   Mean Latency Change:  -1.0%
 
 ⚠️  SYSTEM OVERLOADED!
 
@@ -253,5 +245,5 @@ Final total balance: 100100.00
 === Detailed Report ===
 Report appended to transfer_attack_report.txt
 
-Test accounts created: [dc847d77-5b7c-460a-b49a-2f7b06b9fe4e 5bba53f8-5e19-4831-9f2c-d68f0fdc3514 59bb9de1-51a9-4cbe-9fc0-80e16a94fdf3 91cb0de8-0b79-46f1-84fc-5692249773b9 e678b2bf-fac9-4b13-a2e1-642150c26301 51521f71-d06d-420f-9a67-5cbf839d6846 b0136a88-c9fb-49d1-b7fb-9682e023d73a c02b8b0c-8432-4b75-9699-f8c5bbcdb6be bf783693-03e0-467d-bcfe-f5b0907dc4f0 d611bd33-2fc5-43de-842d-abdc786daab8 7999a823-912d-4bc3-bcab-3020f048d242 9299c383-04cb-4009-a8c2-2542ef53d761 3e6668a8-bf81-4740-bb61-6065f4ea03a2 7652eede-706d-40dc-9771-96420c0e6511 5f20be0e-b2dd-43a5-aac4-96d2130ebe23 b6557c0d-c9f4-49a7-a39c-52eacc46bd0c d64728ae-2f82-4d90-89b4-8f7a3a753d0f 4f2bb6f4-49e6-4bce-afb3-871892f0359b a17649f7-26f8-4ea2-b83f-6abd64df21ce 49f0dd07-dfde-4583-b815-bff7842bff76 58aaf582-a569-46fc-9fc1-69e6e5dcabc6 708171aa-2c4f-4851-98f8-53b5fed87773 4d329c24-7dca-4627-b066-e2ce26871eb5 1546912f-697c-42e2-a481-f74d58ab2e03 2ea27a90-ef5b-4751-86e7-9f28e903bec3 a1cd8410-b683-4b00-b62f-566084e0a593 ebe5ca64-dd0f-4c61-b3e5-8d3112544f5f dc38202a-0f99-4936-8e32-40410d22441c c00e0392-ec03-4786-bb11-7a3240aac16e c8fe4812-1fa4-4272-96a9-1d754c2974c0 3bbd6b3e-66e0-4aef-96b1-d462978ced85 ecaa21b6-ae60-4d3f-8104-65599561969e 36099bf3-4325-4e65-8347-4a47f9a5caa1 ed1c4c6b-4272-41cb-893c-5bfc498d89af 5161be8f-4d6d-4e00-94c2-47c5dab18458 ad82c4fa-8e04-4d5f-b21d-02f0f6b30f26 874fc4d0-c254-465c-a86b-0cf6f905d64f fd5abc4c-5af4-45f4-a839-983bc77293ab 0c1cbae8-fee2-4f11-9c71-b1b406d37340 b856b259-0dcb-495e-a82a-fcbdbf90697a 38dede32-1fc5-4221-8d16-a182457a5eba 7f6e9ade-a388-4b99-87bb-1edc78f53ffc d66ef84e-ec15-46d6-84a6-7fa548adda20 efd4f343-cea0-4bb1-943c-b91d5ac9b98d 1af2740f-7b95-4edd-a270-b42242c46eba d53b811a-3f9b-49e0-acb2-b6799f570ef3 6b261d42-39ac-4524-bdeb-d952d564f05d fe6ab966-4b7f-491f-a90a-df9273b563c8 79ffb1f7-ab76-41ff-b5f4-48a790e7895a 2273b48e-9f86-40fb-967c-d71bb60e920f 9d1f0ba6-eb34-4660-b0f8-6c193b953b78 094512d9-777d-4ce2-b2f2-4999a3f6609f 44af37d6-9327-460a-95cc-1b8e9649bef1 04d136ac-41bd-4641-a672-1eac5647d3d1 b29d7467-f0b5-4405-bd70-eafe873d4567 867b59f6-ede4-4a48-b06b-ab003939d78a 27b8eb1f-06de-4c3e-bdb6-eb4011b0f633 dc489879-ec69-4eb2-beb9-a156fafd2cd5 fcf71b73-bd28-4c91-b383-221fb8f8672b 89085fe5-6fb1-4ff5-9520-956fa05a8ca9 33b91639-0602-4a18-9a40-ba9c48232655 b72dd187-9e7f-4b35-b301-c6b0fb43b033 4fedc239-2cad-44c3-b5dd-eaff7ca15e38 776a27fa-b333-4f34-a199-6c4036d35681 fffa703e-d118-431b-b31b-c59665755271 d914be90-2c13-4ce0-8cfa-07971e6abb78 58cc5ac0-28d9-43ab-bd23-9148f606f624 27447841-654e-4559-9c47-0cffd8e515f9 645d70f3-ab92-4a81-9f27-81d9b1adff09 d6f6b23b-75d0-469f-be8f-2699a233efca a54f264d-db87-432b-b450-34ca780bd9aa 247d3b87-0081-4048-82bd-739f536cfb1a 9bd66337-ea8c-4756-90c0-2f8ba8fdded6 6673f1f4-ac87-4ef2-92e4-d854d99a7e18 317a13d1-da91-439b-b0cd-ee2565a81cdc b1476bb8-97ab-4cb4-96fa-2125cc0af906 361ce93c-6e78-4533-b623-8a114cdcdaed d9cfa689-573b-495c-930c-bb84fc74e205 ceb822d9-db76-45cd-93e8-d98341402e78 8a550826-4554-42a7-8926-802c2e0f9fb8 e4016dda-c7b6-482d-8285-8368621f71e2 ff42f7b2-8872-4ad6-a263-26fa3729fc58 e258a796-7046-4510-a3d5-5463bd15241d 495e6076-d574-4166-a9a8-9907cd543954 de765425-479a-40f2-bca2-4e9714ea8db2 de5d7f9c-c7aa-4157-8f45-5404ab1c2496 0802e21f-f4ad-4a16-9be2-c66ed002c02f 17edbf55-3786-49c6-94ad-95939ce90245 80dad0cf-e2a2-490a-8be4-3cc0552f1b28 fc807e96-186b-4c55-a98e-4de5f8b57bec 6e6ac328-ad1b-4acd-af1f-a1ffbe7cbef3 302bc1ed-b2a1-4a6c-9279-d3eaf858fd96 87e1af0c-3dd2-46a1-9c75-56852f5ade60 d31fcd31-7be0-4c04-b3dc-7cff21c4879c 8010d2e0-3eab-476e-82c0-0221fb39e0b7 4b04fb92-1e8a-45dc-acdd-513a7684ca01 fa1eb17a-21c2-42cb-a226-315e3e3eacb7 961eba72-b1dc-4d74-87d1-1d9b233c3f6d aa8ef7c7-492b-41f1-899e-890890bd76bd c136c73e-f626-450b-8d72-ccd24597b3a3 6ca75c24-ac02-4794-9e66-e3e3806367e8 9ad9e6b7-f860-4b35-8d20-fab69afc0093 cc0a3e1a-0514-40cc-86f0-a20d9ee55369 1785f202-f4a9-4210-90fa-2d786d033f94 766cceeb-bcd1-4b67-a507-17becedea1ad a7423c21-d196-471b-82bb-c14c635b5a6d b29334d0-a27f-4d5e-91ac-9d97d3851bf3 7958ce39-2374-4f7e-985e-ee41c63edd39 6a4b54af-49da-4f1f-ba2c-090b20c0e0b2 ff657760-f95d-4fb8-9653-a0ab12374bea 9c0d76fa-66bc-45ae-9a4b-7d83263bd4f0 e119b1e4-8385-4c02-93de-7d72c17757ce 5fbe5d32-d702-483e-8ab6-5e67370893d4 1bad8b6b-25c1-4b5a-8677-3036b1a03695 bccb51ef-93b4-45b7-9118-2cef20e527b6 be041619-64fc-4e62-8acb-61a169913bbc 58196d5e-1302-4a22-813f-6b61a310e6f9 69905725-8a11-4027-8792-559923175ed2 92f2c983-3157-4885-8bb6-0f113ad2e87d 80ae68d2-8c69-410e-8d4a-a78b99725e0a 2fb8af55-0115-4ef9-8576-d637033e9332 764ee97c-5191-4557-ba80-77213212aa97 eccc0d6e-d45b-4ec5-9a49-8fa9bacb72b9 aaf7dc43-80ac-499c-8226-4adc1591dab4 8eef7f4a-59e5-4d7f-ad19-a839de96ee19 217c40c6-c964-4e42-acd1-42883736e2da 0516deed-de20-4349-92d7-9349bfb30477 9b636ea4-474f-4e5a-ab3a-5c85183c501d 2abe1fba-3be3-4151-9685-2ec51a403703 a53af55b-b327-45c5-8ff4-43fd7c789af2 888305a9-38dc-48bf-9154-a54dc848b959 524b3d43-8e3b-4fcf-967d-7e698b237f1e 6cf7bead-d98f-47e1-9f8d-50aba6e60974 db9d1973-32bc-4f72-980e-04d499c9eb4b 8d2f3f6c-ad35-4b5f-9ef1-87039848d1dc 0fba56ee-a281-4b3f-8b01-4850f780c172 42e8d525-632a-4a70-845c-d6f04cc464b6 076c234b-4bd2-4f66-b992-244643cb518d b352da51-6379-42ea-ad35-5f2e92b2a42c a6502f3c-4d78-47f2-b83d-9fa28d146bd6 eae92043-d736-442b-9496-f56f5e6916c7 bbe4dba0-4857-4760-8524-7ba57cf5e92b 341e3645-1cfb-43bf-b39e-c255bcbf92ff c6aa2178-ab84-42d9-b9ea-079f45d3b036 557548b7-6b56-4970-9925-bdc19c06c6f1 367eebc1-cfc5-4e2d-aae0-362d7f257de0 0d1bcf69-1310-46df-9b73-a1acbbf45157 62aacc49-943e-4b4d-bdae-cc4312b78d93 368a092d-e6b8-48cf-82c7-54f5dbacfc60 75928969-208f-4cef-85e7-dae721afd8ca 51308c89-8d9b-43ce-8093-2d190451fb10 19975c1f-8f8a-481b-a415-43abef7b84c3 8fe141ba-844a-4776-bd29-5f9037b7ab06 5a7ab27d-e29b-41eb-98e0-683a4fee06ec f02d03d9-c0c9-457c-8090-d9ee88ccb2e6 a359ff90-dfe5-43e6-8b0a-99db407f8007 bcd7db17-324d-4e4a-830c-568bb590ab9b a12ffba7-91f8-4b7e-a026-d112cc5e047b f08fb7ab-333f-4cfa-a593-fcd1b39b8bf8 2d18615c-732c-42b4-bc8a-7676061e666d 69374017-0e8f-4815-af38-3006f3ba6a96 1d8e9445-c374-4d45-9888-99414e80966e f52cb173-bfb9-4cbc-977d-454c6fc8f83a 1aab3e8d-84a8-46e5-82f1-122226460ae9 f04efdec-fefe-4b9b-a6a0-dc84015eef80 38279a52-4692-4228-a978-5d0fe7b400c2 bde61d9d-139d-4a01-aa7b-5d73fa7a7f84 42eb2f37-f90e-4925-96a5-c7566c366904 1876acd0-ccfb-430b-a4d3-bc6f31fb71fc 7d406fbf-5f2e-491d-b451-8d3d4bc21614 6db5bcdb-5455-46bf-8f37-ba5eba812dbd 2e587d37-634e-460c-870a-6592f98efd5c 710cc604-80a1-4d1c-a499-01c850aa7242 f48a9f5a-73db-491d-84af-89fc48f7faf4 21a4ec6f-7308-4621-88b0-9ee0758e8cd7 7b07d484-be46-4c8a-919f-9a5c3c08854b ea32acfb-ac25-43bf-ae4f-c42b2a594784 560cec93-6cdd-4dff-9147-462bc858117a ae2033bd-1ddf-4556-9543-fb86e98a4288 fb49608e-5036-471a-8bbe-e7070cc8248d e3f907b5-8ada-44b0-9cce-cd6354298c03 45665485-882e-432b-a555-646aadad988d 4c0780aa-8af0-466f-acfb-af5dccebb070 a78cf694-c708-4276-abaa-45108495b15e c30df6c9-00fa-483b-83e0-266302a5d525 cfc3bf82-0464-4393-947d-09b0b89ad576 90b4c9fe-247d-4132-b12a-2b8a5ee9e7e8 51fc6663-0388-4857-842c-a54cd53f4362 250076ae-a4a4-41c8-9f33-cf33d152fd6a 13e4c308-069e-486a-84f4-f324aa6341c0 dd841752-9f0d-44ca-93cf-3d81eebf5b6e 96db0e23-38b0-495a-8742-d71b688bf4e9 3df59836-ef1f-493c-ada7-3cfd5a731137 75277c31-85bb-4c67-8020-4b4c1de1c189 ec41c870-98eb-454c-bd6b-397516117c85 69cc937d-5531-4ac1-9aa1-827cf2245c23 4b28f1c7-4a31-4dcd-b262-69a233f4f488 570c2da0-13c7-471c-bb55-b254e7b710f8 026cb1eb-717a-4f79-a7b7-0a5fe7b43166 9d3ea5a0-8097-4a5b-80f6-0cffbdd36377]
+Test accounts created: [1b3c0103-aa1f-47c5-a538-5536ba7371b8 bbbfe7c6-77b8-4d34-85ab-6fa3fbe79fa6 8073fee4-c38a-4750-b954-5c0b253c3cc1 89f53109-cb0a-458e-9425-5fa98999c2da 487eadcd-0d39-4e0a-8260-bb319be1a557 6ca0fcfe-4465-4f30-b0d7-95950449d4e0 01a6c4dc-d1d7-4a16-86cd-3bbc59cdd6a0 11f6508d-04bf-4920-b481-ba0dc4f44bab 4509a45b-7d41-4fc1-a437-796ff9e78830 c9de7c79-497d-41e1-bbfd-a8dc5b0d9dc6 14f451b1-cbbc-4107-9c26-e5c44230fc88 eb6bc1ca-51d9-4da1-85c5-5bc032d48740 e55d93fb-3ea2-4724-bc13-8a6949fcaaac 8e1cde7b-143b-4680-8d61-5f804dcaf839 b843900a-1f5b-4a8d-b4c8-f19aaa6a7264 03d995d4-5ec0-4106-934b-7af4a5f896b4 36cd559a-e07c-4085-94bd-1e60cdaa4dc4 4369e68e-f2ea-497d-b620-6ecf6914e090 0e430a1c-0ae4-4e1d-8a6c-df1498e4b32d f170759a-8fc8-44a1-9d21-4676fb0f7daa 67842df1-01f6-4d39-ba60-b71dc03a64f9 9af04131-12bf-4b55-a319-e006ec9c0ae0 49a9a6ab-20bd-4faf-88c9-8677a4c4e69f ab64d148-e7e1-4cf5-9ccd-b41b5252a283 96452884-a9c1-4c6a-b901-c239a160dc8f 4f70a5a5-fa61-4b33-8a9f-9b802d03f336 bc01d66b-f84d-410d-8bc7-84a22a335c1f 7a004aa6-d8b6-4f65-b8fc-1f75cf5c71f4 16f054a8-ed8d-4b9d-9882-78bd7dce0c7f 516600f5-99a3-4620-acde-845bc263cb12 4088eb14-948f-4284-a80a-6525c3c4c61f b0cabdb0-cea4-4eb8-99d8-cb111f6992fa 977dc0cc-2321-45ea-942b-fa1f667d76fb a22238bd-335b-4588-879b-2e369a4150e2 c0486995-7820-4805-b1be-a54033b6e461 93c9486b-3cd0-46bb-90a6-5c2d478a4401 9c9e021c-a67a-41d3-992e-0da3e6cdbcb4 e8673118-621a-4e57-8da0-56db94373754 389cee48-033b-49a6-96c7-32c1c2b432eb 00befa6e-41b5-47cb-9e4e-58734456f058 42a08e1d-fa99-4deb-bc29-1a9973f1be43 cb8747cb-9cc6-454e-bb5d-1c54968dfabe c70abce9-1c81-421d-9cfa-3f064e516c25 9b238e92-b92b-437d-a171-5f276ec26d3c 44245eef-2d5c-45ee-9ef3-6086dd08534f 54524230-5f9a-4f85-8c79-818a072eacd0 aee91d38-3106-4faf-8f98-93748f262fed 1f2b1d5e-bdcd-4d27-b420-950a5f2327fb 3dccf575-1a47-4649-8de7-430552d8e95f eaeb5764-04ab-476b-83af-2694d7942268 f42f86c8-d8f8-4bb5-aad7-b1f178c183f2 c2a3fca0-a314-4e23-8ad1-7e0dde1e7514 1c84ee79-ba6b-4ada-a4a2-c7339dfe0e71 ff2a37aa-b7ff-48da-b1df-1195f0e54963 c50a4e2c-982e-4ebf-b6ce-9a5b4044fa98 ff4c739a-9823-4efa-9104-3f1d0934200c 8227fda4-1801-434d-b428-6278c582beb0 80072ccc-0a71-4dd5-9ce9-b4835c5194c7 b39ed789-b762-4179-a0a1-eda759b70c78 5b61ff1b-c243-433e-9edc-2b92a9fdebb3 55d87466-c071-4331-907c-fba5d712f7de a9908dab-dde0-44e7-ad91-f0fff03ed4fc 70b04e89-a969-40db-9b1a-a116320d2674 18710de2-866c-4a49-8a93-ea8c548f3125 3eeb349e-d4de-45d5-8e69-a47566e78afd 200d502b-ff1c-4916-9998-2e38961bd691 8cf5331e-5dcb-4d25-b169-121845b3013f 7b7d2f03-55a2-496c-8dbd-00e55443d2e1 f23d9d08-3e25-430a-8285-2f940247d5d3 856bc6d0-83e7-4637-a288-71df7ef45b2a 28b2c3e2-1504-49e6-8539-e6a55ed23d17 0e35e129-65ea-47a1-8c06-7be62f59edbd 64ebe02c-9eb4-4fcc-8613-e8a93a8a6c12 f7b539b2-2cd7-488e-adf5-3dfc30996298 63ad1c42-3671-4d29-9db3-62f9e9fbf4d0 f2bda2b5-a7c2-4aad-a9c0-281957b85f7e 353c616e-d7c4-4ca0-adf9-089489ec22f3 76e78e92-78b3-4f3c-b420-133d5c08835f b2aa7b35-5236-4632-a2db-1792a116ee1a 13cd5be9-4bb1-48b7-a9a2-3f93d612a217 912cc8c7-184e-4ad2-ab7b-ad0dbb713235 71b4fe6b-0a0b-4dc8-b884-f8a34eb18201 0a449857-069b-4288-9d38-a93a49dabe32 b5bb84f7-6bdd-4c45-9fa0-c254d90d53a1 9a30a3a0-851a-45f8-bdc4-e31d13d790ba 639cbe3b-06ae-4b44-8520-ed6ceedce2dd 6b81c058-bb9b-464a-96f5-d137bac79ab4 7fc66c4d-75dd-4e24-b7e7-be605f150c1c a3a603f5-e6ec-4399-93ef-17a35ce7eef0 97ce41da-556a-41fe-9537-4f29d3f283a3 09eca027-0ea8-4072-9773-e02fca6c0708 a1a9fed7-776f-4cf6-874f-07875c12767d 0bcf73a5-1b6e-4877-ab3c-4fe2f88ea689 46db3ee7-1f04-4b19-84aa-f5039ee0e47b dac2d573-8637-4f70-b5d0-a84d23359064 4164ab4a-d381-433b-be8d-dbc94c364f54 c94b1abf-3cad-4dff-8272-4da625031e62 bd194c6a-de9d-4115-851a-acc72bf7ad02 659eb210-2e61-4853-aae0-bc8139b075b4 39e9ac73-18ff-41f6-9d3d-be0d804e2a61 e43a20af-2d75-4b77-b630-ac00d1bc9d3e 7700b2c8-90d0-4f04-af51-e9ad4264f40c 92c734be-36aa-4e80-8463-8dcea84bf8c7 5b02069f-3d7a-4fec-9da9-54c0094460d8 fb419af2-3f9a-4cb1-a35c-ef419e09ea20 78861823-3045-42c1-90b2-b82499e20bb6 ad534f58-6f25-483a-ae65-305e6c4165b6 a8857ea9-b5df-4b95-b598-5211f8c8d5c2 77f47558-9c68-4197-abe3-50e5f3bebfc9 06f2d23c-623e-4b3d-9244-8ede358e18a0 e57c51da-48ce-44c2-8c94-b4ffde5a36ba b02ffbb1-92f6-4be3-9486-6e4e0173f98c 010ba993-e657-4273-a712-56b459ae7a6d b8409cb0-2d04-49aa-8e62-43288153d80c eb70fd97-17e8-4499-b244-b1dd523fc556 1fd78278-8235-4fbb-b8a1-d3a3dca6245b 32d6a57b-79b2-43c9-8a2c-f3b35a906daf 74299b07-ffd2-4f1b-8529-b3ea956873ef b98ec16d-e672-4cdb-bf7f-e6dcf87c45bf 4476fe1b-f6e8-4826-8456-a2fd0cc18004 7538a349-d332-462b-9a57-90e3b5161b85 ff34c336-0b1f-4f1f-9c1e-df7715746120 e2ad145a-6b13-4b25-bbfb-35ea2e5c1211 8a1f3dc3-23ab-4af8-b4cc-b2e9f83c0a80 6eb5909f-7067-4510-aabe-fec682f8f261 0eadcfad-d41a-417a-9218-d0a12e4e2c39 2bbdeeab-89ec-41b4-a2b0-6c67275cf37b 02eba69b-de42-4506-b5f6-079d4282cbc1 01f067df-c744-422b-b787-046ae488b2b6 df429317-1697-4070-8ab5-ecdd06dbab9f b9b0936f-6043-4a56-98df-bead211c5d7f 397b4d72-0952-4c6c-a0ab-818ae94d966c 93a5bf9f-3ab6-4700-a16c-652f8dffd956 a42ccc61-f84d-4b9c-80c1-162ebde951bb d3038b4d-36c5-4249-8ff1-e45996206a77 664531de-5ec7-451f-8912-d099ccf56988 bf862305-45ac-4902-a89c-d6a01e736b62 38f2b775-b0cb-4759-8bc7-3eb55aba446a 06640429-ff7a-43cb-ac81-a6257b3e18b3 6c8a3365-a782-49c7-9da1-11e70678b216 cadc5acd-b001-479e-b1b2-82b6a92730b5 e48e1dac-bb72-4877-b950-4fcab14677aa 64acd79a-b9b2-4b5e-9e80-4d8af8369eab 31be8093-1b3f-45cf-beca-cc1135c58571 fa51d8fe-83dd-482d-9dab-f703314d501d 74f14a98-ec73-4e5b-8595-40029e012878 6e2b4d51-35e4-4702-ac09-b8edc3e52dff ba8348f1-aedb-4954-a580-ec7de10d56fa 7bad1a39-2421-4b6c-ba69-db25c4fcd9e3 e4f31f8a-d476-4e10-ab6c-e41f2b9b8696 fc00d11f-b120-4ba3-adca-1bbec205882a 4ed3151f-490b-42d2-b61e-52eda5625653 44c9f76c-6542-43de-bf49-b182ea8d14c5 a4e325c5-8c39-48ae-b90d-4a3109edc5f1 3d107244-a40c-4572-aea7-9bb6637ff14b 2d0f5aaf-97f9-4db3-939f-02b2660d6920 42465c42-f307-4774-9a64-0cfb62b958f8 20895692-137e-4010-a7f9-f9271f35920f 19fcbc7d-17ae-4974-b716-01f81d19b779 a8fde83c-276a-4041-a70e-b3fa55ae3d3b 0b2423a8-7eda-4290-8b46-4bc0f2c7bfe0 b9d56370-f2f3-4a31-bd2b-247122713fac 73ab00a1-f368-4208-a3d5-b7beabe1f731 25796914-0c96-4318-a5b3-627bc77ae9ea f78e7e5c-b121-48da-9946-29c38937cfd3 740a90bf-4178-4b75-b11e-fda7003fab7b 82c1a804-a367-4a33-b603-f06ce061299d a4504ba0-5a48-4440-9eac-d53f4f95c351 5f21f126-5d63-4b28-a582-7c9885e89480 73dda4f2-ff8a-47d6-8a9e-1067afbd0893 f630b76e-b198-4a49-bf9d-b843dad5b462 f29eaf00-5a06-4e2c-8e46-a83163ea2dfb ae7b1782-38d9-429f-9817-279c1fb981bd 19861e63-814c-423a-8fba-7ca256376dbc 7bab4d5b-599d-4c3e-a3f0-7413cc2ec1f7 75a610e9-e297-4c1c-94f3-02172eef8b14 11e6d47d-21a7-4f86-b5fe-ad9237b69ead d1699164-b1bd-4298-8c56-b8635faa20e4 1b0e2c28-418b-4d79-9212-1cd7d58a73c6 ea1dce90-1ca6-4bf6-a71b-6c2e70360f83 4d251852-ce44-4173-bc9a-f2eb33863a72 fc9d8ea3-46cf-43b7-95e1-125fe3668e12 38841da3-09fe-4b31-9fd3-e6eaee969fbf 6617fe4a-03f9-4d80-b6a3-89ad71640657 566cc976-3439-4b3d-a685-d0e2b74efdf4 f8c68c57-73c7-48cb-84e8-31d908903d05 ed1e4b07-691d-4774-bd3c-9b31161f3209 b080cf64-f3fd-4cde-b5d8-da37f564661a 9e03a0f9-43da-481d-a2c9-9feb906b8f90 14bc206d-9d73-4f01-8c64-82b25487a885 f8d810a3-85c4-4e48-bdd8-5847ccbab03e 3e90200e-35dc-4dc9-8697-c05159549d97 baa38b3e-11e5-48cc-bfc9-5c64629585f1 59670f3e-c6a4-42df-87f3-4aa4b9ad1525 5fec8b5c-0a3d-49fa-83ea-55c41f0e728d 643fd028-4350-4aaf-aff9-8351289c6643 12f27d79-d887-4ff3-9e48-7b513276f7da 2113df88-9a30-4986-ba58-0c81b3ebed32 eef76117-c4e5-49ce-85d4-98688e576569 bee59713-6d83-4ae7-9dab-bbaadb4d26be]
 (Manual cleanup may be required if DELETE endpoint is not available)

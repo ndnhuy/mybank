@@ -3,6 +3,7 @@ package loadtest
 import (
 	"encoding/csv"
 	"os"
+	"path/filepath"
 	"strconv"
 	"time"
 )
@@ -36,8 +37,14 @@ func NewTimeSeriesReport() *TimeSeriesReport {
 }
 
 // InitCSV initializes CSV file for time-series data export
-func (tsr *TimeSeriesReport) InitCSV(filename string) error {
-	file, err := os.Create(filename)
+func (tsr *TimeSeriesReport) InitCSV(filepathStr string) error {
+	dir := filepath.Dir(filepathStr)
+	if dir != "." {
+		if err := os.MkdirAll(dir, 0755); err != nil {
+			return err
+		}
+	}
+	file, err := os.Create(filepathStr)
 	if err != nil {
 		return err
 	}
