@@ -1,0 +1,71 @@
+Starting transfer attack: 10 RPS for 10 seconds
+Setting up test customers...
+Scenario: tiny
+Date: 2025-07-06 22:51:54
+Created 10 source customers and 10 destination customers
+Total initial balance: 10010.00
+Target URL: http://localhost:8080/accounts/transfer
+Press Ctrl+C to stop early if needed
+
+Transfer attack in progress............. completed!
+
+[source-0] balance verified: 991.00
+[source-1] balance verified: 988.00
+[source-2] balance verified: 993.00
+[source-3] balance verified: 986.00
+[source-4] balance verified: 988.00
+[source-5] balance verified: 989.00
+[source-6] balance verified: 990.00
+[source-7] balance verified: 989.00
+[source-8] balance verified: 994.00
+[source-9] balance verified: 992.00
+[dest-0] balance verified: 10.00
+[dest-1] balance verified: 11.00
+[dest-2] balance verified: 10.00
+[dest-3] balance verified: 12.00
+[dest-4] balance verified: 9.00
+[dest-5] balance verified: 12.00
+[dest-6] balance verified: 9.00
+[dest-7] balance verified: 10.00
+[dest-8] balance verified: 17.00
+[dest-9] balance verified: 10.00
+✅ All customer balances verified successfully
+Final total balance: 10010.00
+✅ Balance verification passed - no money lost or created
+╔══════════════════════════════════════════════════════════════╗
+║                    QUEUING SYSTEM ANALYSIS                  ║
+╚══════════════════════════════════════════════════════════════╝
+
+📊 SYSTEM OVERVIEW:
+   Observation Duration: 9.899745565s
+   Requests Submitted:   100
+   Requests Completed:   100
+   System Status:        🔴 OVERLOADED
+
+⚡ PERFORMANCE METRICS:
+   Mean Response Time:   24.62388ms
+   50th percentile:      14.98521ms
+   95th percentile:      76.885536ms
+   99th percentile:      77.994657ms
+   Max Response Time:    78.067023ms
+   Success Rate:         100.00%
+
+🔬 QUEUING THEORY ANALYSIS:
+   Arrival Rate (λ):      10.10 requests/sec
+   Service Rate (μ):      10.09 requests/sec
+   Traffic Intensity (ρ): 1.002
+   Throughput:           10.09 requests/sec
+
+🎯 PERFORMANCE ASSESSMENT:
+   Response Time:  🟢 Excellent (< 100ms)
+   System Health:  🔴 System cannot keep up with demand
+
+⚠️  SYSTEM OVERLOADED!
+
+══════════════════════════════════════════════════════════════════
+
+=== Detailed Report ===
+Report appended to transfer_attack_report.txt
+
+Test accounts created: [5af25fe9-e24c-4595-a345-36af8de37754 2eea828d-9831-4f25-906d-96cef80d5758 703ee181-fdd3-493c-8585-37f79abf7639 26ee433b-bf0e-471a-92e9-266e3897818e e94b7f20-873a-450f-8384-67eaa7ffcf8f ad35a7b8-8245-4860-98e2-2c42efdd05db 0aaf70bb-2dc5-4054-8ac8-e9b299e05129 efd0d5d0-0747-4170-820e-7be38e46bd2b 8ff6c3b2-ea30-42a3-9abb-4167c1ee5414 1564e6b1-c0c8-4c78-aea4-f540cc9a0ed3 94b911b9-8200-4ea3-86f2-318a0db9a12b 56d8ab48-1646-4804-b456-d3da9ffa28d2 e5f58b00-c463-44ce-8582-cdaf8bce77e9 e40b61b5-da29-4100-8a00-f186e02c60e8 437c066d-8243-4521-813e-00a191d420ae 946e98be-7c7b-419d-af76-7c08968196b4 c78b544f-cc7f-46a6-926d-ff0ce6b133a2 e360f51d-ce1c-4aef-85ee-52c90305e4fb a49ab335-6c6c-40db-aaaf-adb711ad4bb1 171cd27b-d110-4fdb-8bfc-f38c46a524f4]
+(Manual cleanup may be required if DELETE endpoint is not available)

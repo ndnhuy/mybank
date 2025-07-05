@@ -12,10 +12,13 @@ const (
 	DEFAULT_DURATION = 30 // Default duration in seconds
 )
 
-// getConfigFromEnv reads RPS and DURATION from environment variables or uses defaults
-func getConfigFromEnv() (int, int) {
+// getConfigFromEnv reads RPS, DURATION, NUM_SOURCE_CUSTOMERS, NUM_DEST_CUSTOMERS from environment variables or uses defaults
+func getConfigFromEnv() (int, int, int, int, string) {
 	rps := DEFAULT_RPS
 	duration := DEFAULT_DURATION
+	numSourceCustomers := 100
+	numDestCustomers := 100
+	scenario := "default"
 
 	if envRPS := os.Getenv("RPS"); envRPS != "" {
 		if parsed, err := strconv.Atoi(envRPS); err == nil && parsed > 0 {
@@ -29,11 +32,27 @@ func getConfigFromEnv() (int, int) {
 		}
 	}
 
-	return rps, duration
+	if envNumSource := os.Getenv("NUM_SOURCE_CUSTOMERS"); envNumSource != "" {
+		if parsed, err := strconv.Atoi(envNumSource); err == nil && parsed > 0 {
+			numSourceCustomers = parsed
+		}
+	}
+
+	if envNumDest := os.Getenv("NUM_DEST_CUSTOMERS"); envNumDest != "" {
+		if parsed, err := strconv.Atoi(envNumDest); err == nil && parsed > 0 {
+			numDestCustomers = parsed
+		}
+	}
+
+	if envScenario := os.Getenv("SCENARIO"); envScenario != "" {
+		scenario = envScenario
+	}
+
+	return rps, duration, numSourceCustomers, numDestCustomers, scenario
 }
 
 func main() {
-	rps, testDuration := getConfigFromEnv()
+	rps, testDuration, numSourceCustomers, numDestCustomers, scenario := getConfigFromEnv()
 
-	loadtest.AttackTransfers(rps, testDuration)
+	loadtest.AttackTransfers(rps, testDuration, numSourceCustomers, numDestCustomers, scenario)
 }

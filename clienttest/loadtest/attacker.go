@@ -44,7 +44,7 @@ func (a *Attacker) SetTimeSeriesReport(report *TimeSeriesReport) {
 func (a *Attacker) Attack() {
 	requestCount := 0
 	lastRecordTime := time.Now()
-	recordInterval := 5 * time.Second // Record metrics every 5 seconds
+	recordInterval := 0 * time.Second // Record metrics every 5 seconds
 
 	for res := range a.attacker.Attack(a.targeter, a.rate, a.duration, "Load Test") {
 		a.queueMetrics.metrics.Add(res)

@@ -24,21 +24,25 @@ clean:
 	@echo "Cleaning up temporary files..."
 	@rm -rf loadtest-main
 
+tiny:
+	@echo "Running baseline test..."
+	RPS=10 DURATION=10 NUM_SOURCE_CUSTOMERS=10 NUM_DEST_CUSTOMERS=10 SCENARIO=tiny go run main.go > reports/tiny.txt
+
 baseline:
 	@echo "Running baseline test..."
-	RPS=10 DURATION=60 go run main.go > reports/baseline.txt
+	RPS=10 DURATION=120 SCENARIO=baseline go run main.go > reports/baseline.txt
 
 stress:
 	@echo "Running stress test..."
-	RPS=50 DURATION=60 go run main.go > reports/stress.txt
+	RPS=75 DURATION=90 SCENARIO=stress go run main.go > reports/stress.txt
 
 breaking:
 	@echo "Running breaking test..."
-	RPS=100 DURATION=60 go run main.go > reports/breaking.txt
+	RPS=150 DURATION=60 SCENARIO=breaking go run main.go > reports/breaking.txt
 
 visualize:
 	@echo "Generating time-series visualizations..."
-	@python3 visualize.py --reports-dir reports --output-dir reports
+	@python3 visualize.py --reports-dir reports/20250706 --output-dir reports/graphs
 	@echo "Visualization complete! Check reports/ for generated plots."
 
 all-tests:

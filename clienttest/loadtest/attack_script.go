@@ -11,12 +11,14 @@ import (
 )
 
 // AttackTransfers simulates simultaneous money transfers between customers
-func AttackTransfers(rps, testDuration int) {
+func AttackTransfers(rps, testDuration, numSourceCustomers, numDestCustomers int, scenario string) {
 	fmt.Printf("Starting transfer attack: %d RPS for %d seconds\n", rps, testDuration)
 	fmt.Printf("Setting up test customers...\n")
+	fmt.Printf("Scenario: %s\n", scenario)
+	fmt.Printf("Date: %s\n", time.Now().Format("2006-01-02 15:04:05"))
 
 	// Setup test customers
-	sourceCustomers, destCustomers, initialTotal, err := setupTransferCustomers()
+	sourceCustomers, destCustomers, initialTotal, err := setupTransferCustomers(numSourceCustomers, numDestCustomers)
 	if err != nil {
 		fmt.Printf("Failed to setup customers: %v\n", err)
 		return
@@ -29,8 +31,8 @@ func AttackTransfers(rps, testDuration int) {
 	fmt.Printf("Press Ctrl+C to stop early if needed\n\n")
 
 	queueMetrics := NewQueueMetrics()
-	dt := time.Now().Format("20060102_150405")
-	timeSeriesReport := NewTimeSeriesReport("transfer_attack_test", fmt.Sprintf("reports/timeseries/%v", dt))
+	dt := time.Now().Format("20060102")
+	timeSeriesReport := NewTimeSeriesReport(scenario, fmt.Sprintf("reports/%v", dt))
 
 	fmt.Printf("Transfer attack in progress...")
 
@@ -81,9 +83,7 @@ func AttackTransfers(rps, testDuration int) {
 	fmt.Printf("Report appended to transfer_attack_report.txt\n")
 }
 
-func setupTransferCustomers() (sourceCustomers, destCustomers []*domain.Customer, totalBalance float64, err error) {
-	const numSourceCustomers = 100
-	const numDestCustomers = 100
+func setupTransferCustomers(numSourceCustomers, numDestCustomers int) (sourceCustomers, destCustomers []*domain.Customer, totalBalance float64, err error) {
 	const initialBalance = 1000.0
 
 	// Create source customers with money

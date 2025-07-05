@@ -1,4 +1,0 @@
-Timestamp,Elapsed_Seconds,Mean_Latency_Ms,P95_Latency_Ms,P99_Latency_Ms,Throughput_RPS,Success_Rate_Percent,Request_Count
-2025-07-05T19:25:10+07:00,5.01,13.61,14.78,23.03,10.18,100.00,50
-2025-07-05T19:25:15+07:00,10.01,13.79,18.27,22.88,10.09,100.00,100
-2025-07-05T19:25:15+07:00,10.01,13.79,18.27,22.88,10.09,100.00,100
