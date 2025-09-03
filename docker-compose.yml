@@ -21,6 +21,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
+          memory: 256M
     volumes:
       - .data/logs:/app/logs
   mybankdb:

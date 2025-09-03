@@ -34,11 +34,11 @@ baseline:
 
 stress:
 	@echo "Running stress test..."
-	RPS=50 DURATION=60 SCENARIO=stress go run main.go > reports/stress.txt
+	RPS=100 DURATION=120 SCENARIO=stress go run main.go > reports/stress.txt
 
 breaking:
 	@echo "Running breaking test..."
-	RPS=100 DURATION=60 SCENARIO=breaking go run main.go > reports/breaking.txt
+	RPS=200 DURATION=120 SCENARIO=breaking go run main.go > reports/breaking.txt
 
 visualize:
 	@echo "Generating time-series visualizations..."
