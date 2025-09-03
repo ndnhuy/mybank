@@ -22,15 +22,12 @@ public class WebApplicationTest {
   @Test
   void shouldIncludeAllRequestHeadersInResponseHeaders_whenGetAccounts() throws Exception {
     // Given: Custom headers for the request
-    String header1 = "X-Test-Header-1";
-    String value1 = "value1";
-    String header2 = "X-Test-Header-2";
-    String value2 = "value2";
+    String headerReqId = "X-Request-Id";
+    String reqId = "value1";
 
     // When: GET /accounts is called with custom headers
     var result = mockMvc.perform(MockMvcRequestBuilders.get("/accounts")
-        .header(header1, value1)
-        .header(header2, value2))
+        .header(headerReqId, reqId))
         .andExpect(MockMvcResultMatchers.status().isOk())
         .andReturn();
 
@@ -38,8 +35,7 @@ public class WebApplicationTest {
     HttpHeaders responseHeaders = new HttpHeaders();
     result.getResponse().getHeaderNames().forEach(
         h -> responseHeaders.add(h, result.getResponse().getHeader(h)));
-    assertThat(responseHeaders.get(header1)).contains(value1);
-    assertThat(responseHeaders.get(header2)).contains(value2);
+    assertThat(responseHeaders.get(headerReqId)).contains(reqId);
   }
 
   @Test

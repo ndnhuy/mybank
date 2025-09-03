@@ -30,19 +30,19 @@ tiny:
 
 baseline:
 	@echo "Running baseline test..."
-	RPS=10 DURATION=120 SCENARIO=baseline go run main.go > reports/baseline.txt
+	RPS=10 DURATION=60 SCENARIO=baseline go run main.go > reports/baseline.txt
 
 stress:
 	@echo "Running stress test..."
-	RPS=75 DURATION=90 SCENARIO=stress go run main.go > reports/stress.txt
+	RPS=50 DURATION=60 SCENARIO=stress go run main.go > reports/stress.txt
 
 breaking:
 	@echo "Running breaking test..."
-	RPS=150 DURATION=60 SCENARIO=breaking go run main.go > reports/breaking.txt
+	RPS=100 DURATION=60 SCENARIO=breaking go run main.go > reports/breaking.txt
 
 visualize:
 	@echo "Generating time-series visualizations..."
-	@python3 visualize.py --reports-dir reports/20250706 --output-dir reports/graphs
+	@python3 visualize.py --reports-dir reports --output-dir reports
 	@echo "Visualization complete! Check reports/ for generated plots."
 
 all-tests:
