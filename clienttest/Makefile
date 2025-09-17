@@ -26,7 +26,7 @@ clean:
 
 tiny:
 	@echo "Running baseline test..."
-	RPS=10 DURATION=10 NUM_SOURCE_CUSTOMERS=10 NUM_DEST_CUSTOMERS=10 SCENARIO=tiny go run main.go > reports/tiny.txt
+	RPS=10 DURATION=30 NUM_SOURCE_CUSTOMERS=1 NUM_DEST_CUSTOMERS=1 SCENARIO=tiny go run main.go > reports/tiny.txt
 
 baseline:
 	@echo "Running baseline test..."
@@ -38,7 +38,7 @@ stress:
 
 breaking:
 	@echo "Running breaking test..."
-	RPS=200 DURATION=120 SCENARIO=breaking go run main.go > reports/breaking.txt
+	RPS=300 DURATION=120 SCENARIO=breaking go run main.go > reports/breaking.txt
 
 visualize:
 	@echo "Generating time-series visualizations..."

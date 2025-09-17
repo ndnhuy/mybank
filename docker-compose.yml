@@ -9,7 +9,17 @@ services:
     ports:
       - "8080:8080"
       - "9001:9001"
+      - "9010:9010"
+      - "9991:9991"
     # environment:
+      # - JAVA_TOOL_OPTIONS=-Dcom.sun.management.jmxremote=true
+      #   -Dcom.sun.management.jmxremote.port=9010
+      #   -Dcom.sun.management.jmxremote.rmi.port=9010
+      #   -Dcom.sun.management.jmxremote.local.only=false
+      #   -Dcom.sun.management.jmxremote.authenticate=false
+      #   -Dcom.sun.management.jmxremote.ssl=false
+      #   -Djava.rmi.server.hostname=127.0.0.1
+      #   -XX:StartFlightRecording=name=boot,settings=profile,filename=/tmp/app.jfr,dumponexit=true,disk=true,maxage=30m,maxsize=250M
     # - SPRING_DATASOURCE_URL=jdbc:mysql://mybankdb:3306/mybank?useSSL=false&allowPublicKeyRetrieval=true
     # - SPRING_DATASOURCE_USERNAME=root
     # - SPRING_DATASOURCE_PASSWORD=root
@@ -24,6 +34,7 @@ services:
           memory: 256M
     volumes:
       - .data/logs:/app/logs
+      - ./tmp:/tmp
   mybankdb:
     container_name: mybankdb
     image: mysql:8.0.31
