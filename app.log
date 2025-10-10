@@ -1,0 +1,226 @@
+10:28:04.619 [main][test-trace-id] INFO  c.n.mybank.LoggingConfigurationTest - customer created
+10:28:21.879 [background-preinit][] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+10:28:21.940 [main][] INFO  com.ndnhuy.mybank.TransferTest - Starting TransferTest using Java 22.0.2 with PID 738823 (started by huynguyen in /home/huynguyen/workspace/mybank)
+10:28:21.941 [main][] INFO  com.ndnhuy.mybank.TransferTest - No active profile set, falling back to 1 default profile: "default"
+10:28:22.613 [main][] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+10:28:22.665 [main][] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 1 JPA repository interface.
+10:28:23.195 [main][] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+10:28:23.203 [main][] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+10:28:23.205 [main][] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:28:23.205 [main][] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40]
+10:28:23.251 [main][] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:28:23.253 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1299 ms
+10:28:23.521 [main][] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+10:28:23.524 [main][] WARN  c.z.hikari.util.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+10:28:23.739 [main][] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5897aae1
+10:28:23.740 [main][] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+10:28:23.762 [main][] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+10:28:23.788 [main][] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.13.Final
+10:28:23.817 [main][] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+10:28:23.983 [main][] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+10:28:24.062 [main][] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.31
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+10:28:24.476 [main][] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+10:28:24.477 [main][] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+10:28:24.628 [main][] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+10:28:24.923 [main][] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+10:28:25.669 [main][] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+10:28:25.670 [main][] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+10:28:25.671 [main][] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+10:28:25.762 [main][] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+10:28:25.770 [main][] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 41557 (http) with context path '/'
+10:28:25.844 [main][] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+10:28:25.845 [main][] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-2"]
+10:28:25.845 [main][] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:28:25.845 [main][] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40]
+10:28:25.857 [main][] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:28:25.858 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 84 ms
+10:28:25.876 [main][] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 5 endpoints beneath base path '/actuator'
+10:28:25.926 [main][] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-2"]
+10:28:25.929 [main][] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 37163 (http) with context path '/'
+10:28:25.944 [main][] INFO  com.ndnhuy.mybank.TransferTest - Started TransferTest in 4.313 seconds (process running for 4.987)
+10:28:26.608 [main][975da67f-bb11-4db4-8c50-fd91bd9b2199] INFO  c.ndnhuy.mybank.domain.BankService - Creating account with id: test-account-1760066906607, initial balance: 100.0
+10:28:26.630 [main][975da67f-bb11-4db4-8c50-fd91bd9b2199] INFO  c.ndnhuy.mybank.domain.BankService - Created account with account id: test-account-1760066906607, initial balance: 100.0
+10:28:26.630 [main][975da67f-bb11-4db4-8c50-fd91bd9b2199] INFO  c.ndnhuy.mybank.domain.BankService - Retrieving account info for account with id: test-account-1760066906607
+10:28:26.630 [main][975da67f-bb11-4db4-8c50-fd91bd9b2199] INFO  c.ndnhuy.mybank.domain.BankService - Retrieving account with id: test-account-1760066906607
+10:28:26.646 [SpringApplicationShutdownHook][] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+10:28:26.649 [tomcat-shutdown][] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+10:28:26.649 [SpringApplicationShutdownHook][] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+10:28:26.650 [tomcat-shutdown][] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+10:28:26.659 [SpringApplicationShutdownHook][] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+10:28:26.661 [SpringApplicationShutdownHook][] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+10:28:26.665 [SpringApplicationShutdownHook][] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+10:35:25.885 [background-preinit][][ INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+10:35:25.956 [main][][ INFO  com.ndnhuy.mybank.TransferTest - Starting TransferTest using Java 22.0.2 with PID 747332 (started by huynguyen in /home/huynguyen/workspace/mybank)
+10:35:25.957 [main][][ INFO  com.ndnhuy.mybank.TransferTest - No active profile set, falling back to 1 default profile: "default"
+10:35:26.615 [main][][ INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+10:35:26.646 [main][][ INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 1 JPA repository interface.
+10:35:27.186 [main][][ INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+10:35:27.201 [main][][ INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+10:35:27.204 [main][][ INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:35:27.204 [main][][ INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40]
+10:35:27.247 [main][][ INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:35:27.249 [main][][ INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1278 ms
+10:35:27.520 [main][][ INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+10:35:27.525 [main][][ WARN  c.z.hikari.util.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+10:35:27.753 [main][][ INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@75de7009
+10:35:27.755 [main][][ INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+10:35:27.793 [main][][ INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+10:35:27.825 [main][][ INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.13.Final
+10:35:27.843 [main][][ INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+10:35:28.023 [main][][ INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+10:35:28.078 [main][][ INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.31
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+10:35:28.509 [main][][ INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+10:35:28.511 [main][][ INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+10:35:28.664 [main][][ INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+10:35:28.984 [main][][ WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+10:35:29.554 [main][][ INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+10:35:29.554 [main][][ INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+10:35:29.555 [main][][ INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+10:35:29.663 [main][][ INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+10:35:29.669 [main][][ INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 42845 (http) with context path '/'
+10:35:29.724 [main][][ INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+10:35:29.725 [main][][ INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-2"]
+10:35:29.726 [main][][ INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:35:29.726 [main][][ INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40]
+10:35:29.737 [main][][ INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:35:29.738 [main][][ INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 67 ms
+10:35:29.756 [main][][ INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 5 endpoints beneath base path '/actuator'
+10:35:29.800 [main][][ INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-2"]
+10:35:29.802 [main][][ INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 40731 (http) with context path '/'
+10:35:29.816 [main][][ INFO  com.ndnhuy.mybank.TransferTest - Started TransferTest in 4.212 seconds (process running for 4.943)
+10:35:30.484 [main][][ INFO  c.ndnhuy.mybank.domain.BankService - Creating account with id: test-account-1760067330484, initial balance: 100.0
+10:35:30.509 [main][][ INFO  c.ndnhuy.mybank.domain.BankService - Created account with account id: test-account-1760067330484, initial balance: 100.0
+10:35:30.509 [main][][ INFO  c.ndnhuy.mybank.domain.BankService - Retrieving account info for account with id: test-account-1760067330484
+10:35:30.509 [main][][ INFO  c.ndnhuy.mybank.domain.BankService - Retrieving account with id: test-account-1760067330484
+10:35:30.533 [SpringApplicationShutdownHook][][ INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+10:35:30.535 [tomcat-shutdown][][ INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+10:35:30.536 [SpringApplicationShutdownHook][][ INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+10:35:30.537 [tomcat-shutdown][][ INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+10:35:30.546 [SpringApplicationShutdownHook][][ INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+10:35:30.547 [SpringApplicationShutdownHook][][ INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+10:35:30.551 [SpringApplicationShutdownHook][][ INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+10:36:17.110 [background-preinit][][ INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+10:36:17.169 [main][][ INFO  c.ndnhuy.mybank.WebApplicationTest - Starting WebApplicationTest using Java 22.0.2 with PID 748707 (started by huynguyen in /home/huynguyen/workspace/mybank)
+10:36:17.170 [main][][ INFO  c.ndnhuy.mybank.WebApplicationTest - No active profile set, falling back to 1 default profile: "default"
+10:36:17.833 [main][][ INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+10:36:17.870 [main][][ INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 30 ms. Found 1 JPA repository interface.
+10:36:18.473 [main][][ INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+10:36:18.489 [main][][ INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+10:36:18.492 [main][][ INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:36:18.493 [main][][ INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40]
+10:36:18.546 [main][][ INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:36:18.547 [main][][ INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1363 ms
+10:36:18.820 [main][][ INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+10:36:18.823 [main][][ WARN  c.z.hikari.util.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+10:36:19.050 [main][][ INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@703cb756
+10:36:19.051 [main][][ INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+10:36:19.073 [main][][ INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+10:36:19.100 [main][][ INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.13.Final
+10:36:19.119 [main][][ INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+10:36:19.257 [main][][ INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+10:36:19.313 [main][][ INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.31
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+10:36:19.722 [main][][ INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+10:36:19.724 [main][][ INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+10:36:19.887 [main][][ INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+10:36:20.211 [main][][ WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+10:36:20.799 [main][][ INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+10:36:20.800 [main][][ INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+10:36:20.801 [main][][ INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+10:36:20.917 [main][][ INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+10:36:20.924 [main][][ INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 40619 (http) with context path '/'
+10:36:20.980 [main][][ INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+10:36:20.980 [main][][ INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-2"]
+10:36:20.980 [main][][ INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:36:20.980 [main][][ INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40]
+10:36:20.987 [main][][ INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:36:20.987 [main][][ INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 61 ms
+10:36:20.997 [main][][ INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 5 endpoints beneath base path '/actuator'
+10:36:21.025 [main][][ INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-2"]
+10:36:21.026 [main][][ INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 46143 (http) with context path '/'
+10:36:21.035 [main][][ INFO  c.ndnhuy.mybank.WebApplicationTest - Started WebApplicationTest in 4.22 seconds (process running for 4.904)
+10:36:21.510 [main][0e69036e-a619-46b0-9592-fe31163c2677][ INFO  c.ndnhuy.mybank.domain.BankService - Creating account with id: 113e86b3-d8a7-491f-82c8-0c86e24fe546, initial balance: 1000.0
+10:36:21.580 [main][0e69036e-a619-46b0-9592-fe31163c2677][ INFO  c.ndnhuy.mybank.domain.BankService - Created account with account id: 113e86b3-d8a7-491f-82c8-0c86e24fe546, initial balance: 1000.0
+10:36:21.645 [SpringApplicationShutdownHook][][ INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+10:36:21.647 [tomcat-shutdown][][ INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+10:36:21.648 [SpringApplicationShutdownHook][][ INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+10:36:21.649 [tomcat-shutdown][][ INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+10:36:21.655 [SpringApplicationShutdownHook][][ INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+10:36:21.657 [SpringApplicationShutdownHook][][ INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+10:36:21.663 [SpringApplicationShutdownHook][][ INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+10:43:36.952 [background-preinit][] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+10:43:37.058 [main][] INFO  c.ndnhuy.mybank.WebApplicationTest - Starting WebApplicationTest using Java 22.0.2 with PID 756747 (started by huynguyen in /home/huynguyen/workspace/mybank)
+10:43:37.060 [main][] INFO  c.ndnhuy.mybank.WebApplicationTest - No active profile set, falling back to 1 default profile: "default"
+10:43:37.815 [main][] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+10:43:37.874 [main][] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 1 JPA repository interface.
+10:43:38.427 [main][] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+10:43:38.435 [main][] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+10:43:38.437 [main][] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:43:38.437 [main][] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40]
+10:43:38.465 [main][] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:43:38.466 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1396 ms
+10:43:38.633 [main][] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+10:43:38.636 [main][] WARN  c.z.hikari.util.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+10:43:38.853 [main][] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@79e90571
+10:43:38.854 [main][] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+10:43:38.877 [main][] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+10:43:38.902 [main][] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.13.Final
+10:43:38.920 [main][] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+10:43:39.091 [main][] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+10:43:39.156 [main][] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.31
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+10:43:39.592 [main][] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+10:43:39.593 [main][] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+10:43:39.768 [main][] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+10:43:40.088 [main][] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+10:43:40.633 [main][] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+10:43:40.633 [main][] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+10:43:40.635 [main][] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+10:43:40.727 [main][] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+10:43:40.739 [main][] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 33441 (http) with context path '/'
+10:43:40.824 [main][] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+10:43:40.825 [main][] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-2"]
+10:43:40.826 [main][] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:43:40.826 [main][] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40]
+10:43:40.837 [main][] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:43:40.837 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 94 ms
+10:43:40.858 [main][] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 5 endpoints beneath base path '/actuator'
+10:43:40.904 [main][] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-2"]
+10:43:40.906 [main][] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 45091 (http) with context path '/'
+10:43:40.921 [main][] INFO  c.ndnhuy.mybank.WebApplicationTest - Started WebApplicationTest in 4.343 seconds (process running for 5.079)
+10:43:41.334 [main][89dd0d9c-3fb2-43d4-baca-ec468fb94862] INFO  c.n.m.infra.RequestLoggingFilter - Incoming request: POST /accounts headers=[Content-Type=application/json;charset=UTF-8; Content-Length=23; ]
+10:43:41.424 [main][89dd0d9c-3fb2-43d4-baca-ec468fb94862] INFO  c.ndnhuy.mybank.domain.BankService - Creating account with id: 865e251a-acc2-452a-8ff3-7a1a98fdf2c7, initial balance: 1000.0
+10:43:41.524 [main][89dd0d9c-3fb2-43d4-baca-ec468fb94862] INFO  c.ndnhuy.mybank.domain.BankService - Created account with account id: 865e251a-acc2-452a-8ff3-7a1a98fdf2c7, initial balance: 1000.0
+10:43:41.605 [SpringApplicationShutdownHook][] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+10:43:41.607 [tomcat-shutdown][] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+10:43:41.607 [SpringApplicationShutdownHook][] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+10:43:41.608 [tomcat-shutdown][] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+10:43:41.617 [SpringApplicationShutdownHook][] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+10:43:41.619 [SpringApplicationShutdownHook][] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+10:43:41.624 [SpringApplicationShutdownHook][] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

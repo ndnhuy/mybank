@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +18,12 @@ import lombok.extern.slf4j.Slf4j;
  * Generic service for managing local locks on resources identified by keys to prevent concurrent modifications.
  * This service provides a way to acquire locks on multiple resources in a consistent
  * order, ensuring that deadlocks do not occur.
- * 
- * IMPORTANT: This implementation only provides local (in-memory) locking within a 
- * single JVM instance. It does NOT support distributed locking across multiple 
- * application instances or nodes. For distributed systems, consider using external 
+ * <p>
+ * IMPORTANT: This implementation only provides local (in-memory) locking within a
+ * single JVM instance. It does NOT support distributed locking across multiple
+ * application instances or nodes. For distributed systems, consider using external
  * coordination services like Redis, Zookeeper, or database-based locking mechanisms.
- * 
+ *
  * @param <K> the type of keys used to identify resources
  */
 @Service
@@ -30,14 +32,14 @@ public class LocalLockService<K extends Comparable<K>> {
 
   private final Map<K, ReentrantLock> lockMap = new ConcurrentHashMap<>();
 
-  private ReentrantLock getLock(K key) {
+  private Lock getLock(K key) {
     return lockMap.computeIfAbsent(key, k -> new ReentrantLock());
   }
 
   /**
    * Acquires locks for the specified resource keys in a consistent order to prevent deadlocks.
    * Handles exceptions gracefully by releasing any acquired locks before re-throwing.
-   * 
+   *
    * @param keys the resource keys for which to acquire locks
    * @return a Runnable that releases the locks when executed
    * @throws IllegalArgumentException if no keys provided or if duplicates exist
@@ -78,7 +80,7 @@ public class LocalLockService<K extends Comparable<K>> {
     try {
       // Acquire locks one by one, keeping track of what we've acquired
       for (K key : sortedKeys) {
-        ReentrantLock lock = getLock(key);
+        var lock = getLock(key);
         lock.lock();
         lockedKeys.add(key);
         log.debug("Acquired lock for resource: {}", key);

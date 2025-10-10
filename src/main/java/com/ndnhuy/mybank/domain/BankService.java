@@ -2,6 +2,8 @@ package com.ndnhuy.mybank.domain;
 
 import java.util.List;
 import java.util.UUID;
+
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,6 +97,8 @@ public class BankService {
       var accountsMap = OrderedKeyDataFetcher.fetchDataInOrderedKey(this::getAccountForUpdate, fromAccId, toAccId);
       var fromAccount = accountsMap.get(fromAccId);
       var toAccount = accountsMap.get(toAccId);
+//      var fromAccount = getAccount(fromAccId);
+//      var toAccount = getAccount(toAccId);
 
       fromAccount.withdraw(amount);
       toAccount.deposit(amount);

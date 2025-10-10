@@ -1,35 +1,53 @@
 Starting transfer attack: 10 RPS for 30 seconds
 Setting up test customers...
 Scenario: tiny
-Date: 2025-09-04 19:49:34
-Created 1 source customers and 1 destination customers
-Total initial balance: 1001.00
+Date: 2025-10-05 11:17:38
+Created 10 source customers and 10 destination customers
+Total initial balance: 10010.00
 Target URL: http://localhost:8080/accounts/transfer
 Press Ctrl+C to stop early if needed
 
 Transfer attack in progress................................. completed!
 
-[source-0] balance verified: 700.00
-[dest-0] balance verified: 301.00
+[source-0] balance verified: 962.00
+[source-1] balance verified: 961.00
+[source-2] balance verified: 966.00
+[source-3] balance verified: 965.00
+[source-4] balance verified: 979.00
+[source-5] balance verified: 981.00
+[source-6] balance verified: 962.00
+[source-7] balance verified: 976.00
+[source-8] balance verified: 971.00
+[source-9] balance verified: 977.00
+[dest-0] balance verified: 35.00
+[dest-1] balance verified: 28.00
+[dest-2] balance verified: 33.00
+[dest-3] balance verified: 30.00
+[dest-4] balance verified: 26.00
+[dest-5] balance verified: 39.00
+[dest-6] balance verified: 22.00
+[dest-7] balance verified: 33.00
+[dest-8] balance verified: 31.00
+[dest-9] balance verified: 33.00
 ✅ All customer balances verified successfully
-Final total balance: 1001.00
+Final total balance: 10010.00
 ✅ Balance verification passed - no money lost or created
 ╔══════════════════════════════════════════════════════════════╗
 ║                    QUEUING SYSTEM ANALYSIS                  ║
 ╚══════════════════════════════════════════════════════════════╝
 
 📊 SYSTEM OVERVIEW:
-   Observation Duration: 29.900281762s
+   Observation Duration: 29.900383174s
    Requests Submitted:   300
    Requests Completed:   300
    System Status:        🔴 OVERLOADED
 
 ⚡ PERFORMANCE METRICS:
-   Mean Response Time:   20.296415ms
-   50th percentile:      17.008767ms
-   95th percentile:      27.140749ms
-   99th percentile:      98.554963ms
-   Max Response Time:    179.544122ms
+   Mean Response Time:   36.135302ms
+   50th percentile:      23.673451ms
+   95th percentile:      179.396434ms
+   99th percentile:      180.955187ms
+   Max Response Time:    183.936978ms
    Success Rate:         100.00%
 
 🔬 QUEUING THEORY ANALYSIS:
@@ -49,5 +67,5 @@ Final total balance: 1001.00
 === Detailed Report ===
 Report appended to transfer_attack_report.txt
 
-Test accounts created: [8df4e1e6-0b12-4484-a496-fe5b6b78bbbc 06ee9574-168c-47a4-9961-aa89a274a504]
+Test accounts created: [0fc51b83-ca5c-4178-8fdf-3d47444ebed8 125ae9a5-65b7-42b8-b4f9-2500291933d8 ef34a2d5-e39f-45c9-9c78-c47abadeaefe ca4a650d-2412-4bac-ad89-6f3483104ca3 186d97fd-6079-4529-bf89-fb73124d226d ea56dea8-1123-4b76-a487-752ff161bd37 eea3fdef-3aae-4e7a-91c6-a74a36116526 cd1493cf-bfc0-4737-8a8b-ad8949f27d3c d7b4d685-a58e-4263-bf74-7d9917449347 b912d119-4da9-4e2a-b71e-2b45c2b2e640 3fe8c943-237f-4308-b4c8-278c512ea99b 174a556e-a6d0-463c-9bec-56881633420f 346bce55-03d6-4a78-8bdc-eb3c268deecb 46c41e8d-8a41-4991-b2e6-3c072d289741 8c1df8d8-0edd-448f-9654-9d4273aa130e 8a452d68-88d4-436f-9ae4-aaf1979235a3 50b4ada9-d347-4370-8dd2-d556b94d2624 8d08e67b-6653-4a25-95e8-9cf7a5e3dc7f c97e10c7-519e-4777-843c-ea2f5bcbda39 103a24cb-1fd4-44a8-8908-f3a05d01fd36]
 (Manual cleanup may be required if DELETE endpoint is not available)
